@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SignIn</title>
+    <!--<link rel="stylesheet" href="../../static/style.css">-->
+    <link rel="stylesheet" href="../../static/admin_style.css">
+</head>
+<body >
+
+
+  <h1>管理员登录</h1>
+	<div class="main-agileinfo">
+		<div class="sap_tabs">
+			<div id="horizontalTab">
+				<ul class="resp-tabs-list">
+                    <a class="resp-tab-item" onclick="window.location.replace('{{ url_for('web.index') }}')"><span>网站首页</span></a>
+                    <a class="resp-tab-item" onclick="window.location.replace('{{ url_for('web.search') }}')"><span>机票查询</span></a>
+                    <a class="resp-tab-item" onclick="window.location.replace('{{ url_for('web.register') }}')"><span>会员注册</span></a>
+                    <a class="resp-tab-item" onclick="window.location.replace('{{ url_for('web.login') }}')"><span>会员登陆</span></a>
+                    <a class="resp-tab-item" onclick="window.location.replace('{{ url_for('web.personal_info') }}')"><span>会员中心</span></a>
+				</ul>
+				<div class="clearfix"> </div>
+                <div class="signinform">
+                    <form class="adminsign" action="{{ url_for('admin.login') }}" method="post">
+                        <table style="margin: 0 auto;width: auto;height: auto">
+                            <tr style="height: 50px;width: 100px">
+                                <td style="height: 50px">{{ form.nickname.label }}</td> <td>{{ form.nickname }}</td>
+                            </tr>
+                            <tr style="height: 50px;width: 100px">
+                                <td style="height: 50px">{{ form.password.label }}</td>  <td>{{ form.password }}</td>
+                            </tr>
+                        </table>
+                        <input type="submit" value="登录">
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

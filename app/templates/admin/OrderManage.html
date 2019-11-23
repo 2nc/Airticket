@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/admin_style.css">
+    <title>订单管理</title>
+</head>
+<body>
+<div class="head">
+    <h1>后台管理</h1>
+    <div class="url">
+        <ul class="menu">
+            <a class="menu-item" href="{{url_for('web.index')}}"><span>网站首页</span></a>
+            <a class="menu-item" href="{{ url_for('admin.login') }}"><span>退出登录</span></a>
+        </ul>
+    </div>
+</div>
+<div class="left">
+    <div class="left-menu">
+        <div class="h5head">
+            <h2>管理菜单</h2>
+        </div>
+        <div class="admin_manage">
+            <div class="h3head">
+                <h3>管理员管理</h3>
+            </div>
+            <div class="admin_manage_content">
+                <ul class="admin_manage_list">
+                    <a class="admin_manage_item" href="{{ url_for('admin.add_admin') }}"><span>添加管理员</span></a>
+                    <a class="admin_manage_item" href="{{ url_for('admin.admin_manage') }}"><span>管理员管理</span></a>
+                </ul>
+            </div>
+        </div>
+        <div class="business_manage">
+            <div class="h6head">
+                <h3>机票管理</h3>
+            </div>
+            <div class="business_menu">
+                <ul class="business_menu_list">
+                    <a class="business_menu_item" href="{{ url_for('admin.add_ticket') }}"><span>添加机票</span></a>
+                    <a class="business_menu_item" href="{{ url_for('admin.company') }}"><span>航空公司管理</span></a>
+{#                    <a class="business_menu_item" href="{{ url_for('admin.test') }}"><span>机票信息管理</span></a>#}
+{#                    <a class="business_menu_item" href="{{ url_for('admin.test') }}"><span>航班信息查询</span></a>#}
+                    <a class="business_menu_item" href="{{ url_for('admin.manage_order') }}"><span>订票管理</span></a>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="right">
+    <div class="right_title">
+        <h3>订单管理</h3>
+    </div>
+    <div class="ticke_order_req">
+        <table  style="margin: 10px;width: 70%">
+            <tr>
+                <td> 订单编号 </td>
+                <td> 订单路线 </td>
+                <td> 出发时间 </td>
+                <td> 舱位等级 </td>
+                <td> 乘客姓名 </td>
+                <td> 乘客电话 </td>
+                <td> 乘客证件 </td>
+                <td> 确认 </td>
+                <td> 删除 </td>
+            </tr>
+            {% for item in orders %}
+                <tr>
+                <td>{{ item.order_id }}</td>
+                <td>{{ item.route }}</td>
+                <td>{{ item.depart_time }}</td>
+                <td>{{ item.ticket_type }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.phone_number }}</td>
+                <td>{{ item.id_card }}</td>
+                <td>{{ item.status }}</td>
+                <td><form action="{{ url_for('admin.manage_order',order_id = item.order_id) }}" method="post">
+                <input type="submit" value="确认">
+                </form></td>
+                <td><form action="{{ url_for('admin.dispose_order',order_id = item.order_id) }}" method="post">
+                <input type="submit" value="删除">
+                </form></td>
+
+{#                <td><a method="post" href="{{ url_for('admin.manage_order',order_id = item.order_id) }}"><span>确认</span></a></td>#}
+{#                <td><a method="delete" href="{{ url_for('admin.manage_order',order_id=item.order_id) }}"><span>删除</span></a></td>#}
+                </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+</div>
+</body>
+</html>
