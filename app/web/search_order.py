@@ -15,15 +15,22 @@ from app.models.base import db
 from app.models.order import Order
 from app.models.ticket import Ticket
 from . import web
+from boto3.dynamodb.conditions import Key, Attr
 
 
 @web.route('/search', methods=['GET', 'POST'])
 def search():
     form = SearchForm(request.form)
     if request.method == 'POST':  # and form.validate():
+        ticket_t = db.Table('ticket')
+        response = ticket_t.scan(
+            FilterExpression=Attr('single_double').eq(form.single_double.data) and
+                             Attr('depart_date').eq(str(form.depart_date.data)) and
+                             Attr('depart_city').eq(form.depart_city.data) and
+                             Attr('arrive_city').eq(form.arrive_city.data),
 
-        tickets = Ticket.query.filter_by(single_double=form.single_double.data, depart_date=form.depart_date.data,
-                                         depart_city=form.depart_city.data, arrive_city=form.arrive_city.data).all()
+        )
+        tickets = response['Items']
         tickets = SearchTicket(tickets).tickets  # 列表包含着字典
         return render_template('web/SearchResults.html', tickets=tickets, form=form)
 
