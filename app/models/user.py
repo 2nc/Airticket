@@ -71,9 +71,7 @@ class User(UserMixin, Base):
         return check_password_hash(self._password, raw)
 
 
-from app import login_manager
 
 
-@login_manager.user_loader
-def get_user(uid):
-    return User.query.get(int(uid))
+
+

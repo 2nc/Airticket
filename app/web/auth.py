@@ -5,15 +5,35 @@
     Description :
 """
 
-from flask import render_template, request, redirect, url_for, flash, app
-from flask_login import login_user, logout_user, current_user, login_required
+from flask import render_template, request, redirect, url_for, flash, app, session
+from flask_login import login_user, logout_user, current_user, login_required, UserMixin
 
 from app.forms.auth import RegisterForm, LoginForm, ChangeInfoForm
 from app.models.base import db
-from app.models.user import User, get_user
+from app.models.user import User
 from . import web
 from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
+from boto3.dynamodb.conditions import Key, Attr
+from app import login_manager
 
+class User(UserMixin):
+    def is_authenticated(self):
+        return True
+
+    def is_actice(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return "1"
+
+@login_manager.user_loader
+def get_user(uid):
+    user=User()
+    return user
 
 @web.route('/register', methods=['GET', 'POST'])
 def register():
@@ -22,26 +42,12 @@ def register():
         user_t = db.Table('user')
         user_t.put_item(
             Item={
-                'name': form.name.data,
+                'nickname': form.nickname.data,
                 'create_time': int(datetime.now().timestamp()),
-                'single_double': form.single_double.data,
-                'company_name': form.company_name.data,
-                'depart_city': form.depart_city.data,
-                'arrive_city': form.arrive_city.data,
-                'depart_time': form.depart_time.data,
-                'depart_date': str(form.depart_date.data),
-                'arrive_time': form.arrive_time.data,
-                'arrive_date': str(form.arrive_date.data),
-                'return_date': str(form.return_date.data),
-                'return_time': form.return_time.data,
-                'first_class_price': form.first_class_price.data,
-                'first_class_num': form.first_class_num.data,
-                'second_class_price': form.second_class_price.data,
-                'second_class_num': form.second_class_num.data,
-                'third_class_price': form.third_class_price.data,
-                'third_class_num': form.third_class_num.data,
-                'depart_airport': form.depart_airport.data,
-                'arrive_airport': form.arrive_airport.data
+                'name': form.name.data,
+                'phone_number': form.phone_number.data,
+                'id_card': form.id_card.data,
+                'password': generate_password_hash(form.password.data),
             }
         )
         return redirect(url_for('web.login'))
@@ -52,14 +58,21 @@ def register():
 def login():
     form = LoginForm(request.form)
     if request.method == 'POST' and form.validate():
-        user = User.query.filter_by(nickname=form.nickname.data).first()
-        if user and user.check_passward(form.password.data):
+        user_t = db.Table('user')
+        response = user_t.scan(
+            FilterExpression=Attr('nickname').eq(form.nickname.data)
+        )
+        userc = response['Items'][0]['nickname']
+        pw = response['Items'][0]['password']
+        if userc and check_password_hash(pw,form.password.data):
             from flask import session
             from datetime import timedelta
 
             session.permanent = True
             app.permanent_session_lifetime = timedelta(minutes=30)
+            user=User()
             login_user(user, remember=True)
+            session['usernickname'] = userc
             next = request.args.get('next')
             print(next)
             if not next:  # or not next.startwith('/'):
@@ -70,7 +83,7 @@ def login():
     return render_template('web/VIPSignIn.html', form=form)
 
 
-@web.route('/personalInfo', methods=['GET', 'POST'])
+@web.route('/personalInfo/', methods=['GET', 'POST'])
 @login_required
 def personal_info():
     form = ChangeInfoForm(request.form)
@@ -79,13 +92,16 @@ def personal_info():
         changed = user.change_info(form)
         if changed:
             return redirect(url_for('web.personal_info'))
-    userid = current_user.id
-    user = get_user(userid)
-    form.nickname.default = user.nickname
-    form.password.default = user.password
-    form.name.default = user.name
-    form.id_card.default = user.id_card
-    form.phone_number.default = user.phone_number
+    user_t = db.Table('user')
+    response = user_t.scan(
+        FilterExpression=Attr('nickname').eq(session['usernickname'])
+    )
+    user=response['Items'][0]
+    form.nickname.default = user['nickname']
+    form.password.default = user['password']
+    form.name.default = user['name']
+    form.id_card.default = user['id_card']
+    form.phone_number.default = user['phone_number']
     form.process()
     return render_template('web/VIPInfo.html', form=form)
 
