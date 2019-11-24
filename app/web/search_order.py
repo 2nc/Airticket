@@ -75,7 +75,7 @@ def save_order():
                 'route': form.route.data,
                 'depart_time': form.depart_time.data,
                 'ticket_type': form.ticket_type.data,
-                'status': '正在处理'
+                'order_status': '正在处理'
             }
         )
         return redirect(url_for('web.my_order'))

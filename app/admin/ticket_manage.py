@@ -15,6 +15,7 @@ from . import admin
 from datetime import datetime
 from boto3.dynamodb.conditions import Key, Attr
 
+
 @admin.route('/admin/test')
 def test():
     return 'test'
@@ -42,7 +43,7 @@ def company():
 # 修改删除公司
 @admin.route('/admin/company/<company_name>', methods=['GET', 'POST'])
 def change_company(company_name):
-    #form = AddCompanyForm(request.form)
+    # form = AddCompanyForm(request.form)
     company_t = db.Table('company')
     response = company_t.scan(
         FilterExpression=Attr('En_name').eq(company_name)
@@ -103,13 +104,20 @@ def add_ticket():
 def manage_order():
     order_id = request.args.get('order_id')
     if request.method == 'POST':  # and form.validate():
-        order = Order.query.filter_by(order_id=order_id).first()
-
-        with db.auto_commit():
-            order.status = '已经处理'
-            db.session.add(order)
-            return redirect(url_for('admin.manage_order'))
-    orders = Order.query.all()
+        order_t = db.Table('order')
+        response = order_t.update_item(
+            Key={
+                'order_id': order_id
+            },
+            UpdateExpression='SET order_status = :val1',
+            ExpressionAttributeValues={
+                ':val1': '已经处理'
+            }
+        )
+        return redirect(url_for('admin.manage_order'))
+    order_t = db.Table('order')
+    response = order_t.scan()
+    orders = response['Items']
     orders = ManageOrder(orders).order
     return render_template('admin/OrderManage.html', orders=orders)
 
@@ -117,7 +125,11 @@ def manage_order():
 @admin.route('/admin/order/dispose_order', methods=['POST'])
 def dispose_order():
     order_id = request.args.get('order_id')
-    with db.auto_commit():
-        order = Order.query.filter_by(order_id=order_id).first()
-        db.session.delete(order)
+    order_t = db.Table('order')
+    order_t.delete_item(
+        Key={
+            'order_id': order_id
+        }
+    )
+
     return redirect(url_for('admin.manage_order'))
