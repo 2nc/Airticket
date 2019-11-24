@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a4447083-13a9-42eb-9a97-00cc722bbcfd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/airplain.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/airticket.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/admin/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/admin/auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/admin/ticket_manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/admin/ticket_manage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/forms/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/forms/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/web/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/web/auth.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

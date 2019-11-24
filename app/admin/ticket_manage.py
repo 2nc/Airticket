@@ -12,7 +12,8 @@ from app.models.base import db
 from app.models.order import Order
 from app.models.ticket import Company, Ticket
 from . import admin
-
+from datetime import datetime
+from boto3.dynamodb.conditions import Key, Attr
 
 @admin.route('/admin/test')
 def test():
@@ -23,28 +24,44 @@ def test():
 @admin.route('/admin/company', methods=['GET', 'POST'])
 def company():
     form = AddCompanyForm(request.form)
-    companys = CompanyInfo(Company.query.all()).companys
+    company_t = db.Table('company')
+    response = company_t.scan()
+    companys = response['Items']
     if request.method == 'POST':  # and form.validate():
-        with db.auto_commit():
-            company = Company()
-            company.set_attrs(form.data)
-            db.session.add(company)
-            return redirect(url_for('admin.company'))
+        company_t.put_item(
+            Item={
+                'company_name': form.company_name.data,
+                'En_name': form.En_name.data,
+                'create_time': int(datetime.now().timestamp())
+            }
+        )
+        return redirect(url_for('admin.company'))
     return render_template('admin/CompanyManage.html', form=form, companys=companys)
 
 
 # 修改删除公司
 @admin.route('/admin/company/<company_name>', methods=['GET', 'POST'])
 def change_company(company_name):
-    form = AddCompanyForm(request.form)
-    com=Company.query.filter_by(En_name=company_name).first()
-    # if request.method == 'POST':  # and form.validate():
-
-    if Ticket.query.filter_by(company_name=com.company_name).first():
+    #form = AddCompanyForm(request.form)
+    company_t = db.Table('company')
+    response = company_t.scan(
+        FilterExpression=Attr('En_name').eq(company_name)
+    )
+    com = response['Items'][0]
+    ticket_t = db.Table('ticket')
+    response = ticket_t.scan(
+        FilterExpression=Attr('company_name').eq(com['company_name'])
+    )
+    tic = response['Items']
+    if len(tic):
         flash("WARNING!  该公司有关联的机票或订单，不能删除")
         return redirect(url_for('admin.company'))
-    with db.auto_commit():
-        db.session.delete(com)
+
+    company_t.delete_item(
+        Key={
+            'company_name': com['company_name']
+        }
+    )
     return redirect(url_for('admin.company'))
 
 
@@ -53,11 +70,32 @@ def change_company(company_name):
 def add_ticket():
     form = AddTicketForm(request.form)
     if request.method == 'POST':  # and form.validate():
-        with db.auto_commit():
-            ticket = Ticket()
-            ticket.set_attrs(form.data)
-            db.session.add(ticket)
-            return redirect(url_for('admin.add_ticket'))
+        ticket_t = db.Table('ticket')
+        ticket_t.put_item(
+            Item={
+                'name': form.name.data,
+                'create_time': int(datetime.now().timestamp()),
+                'single_double': form.single_double.data,
+                'company_name': form.company_name.data,
+                'depart_city': form.depart_city.data,
+                'arrive_city': form.arrive_city.data,
+                'depart_time': form.depart_time.data,
+                'depart_date': str(form.depart_date.data),
+                'arrive_time': form.arrive_time.data,
+                'arrive_date': str(form.arrive_date.data),
+                'return_date': str(form.return_date.data),
+                'return_time': form.return_time.data,
+                'first_class_price': form.first_class_price.data,
+                'first_class_num': form.first_class_num.data,
+                'second_class_price': form.second_class_price.data,
+                'second_class_num': form.second_class_num.data,
+                'third_class_price': form.third_class_price.data,
+                'third_class_num': form.third_class_num.data,
+                'depart_airport': form.depart_airport.data,
+                'arrive_airport': form.arrive_airport.data
+            }
+        )
+        return redirect(url_for('admin.add_ticket'))
     return render_template('admin/TicketAdd.html', form=form)
 
 

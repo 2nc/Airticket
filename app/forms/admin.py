@@ -10,7 +10,7 @@ from wtforms.validators import Length, Email, ValidationError, EqualTo, Required
 
 from app.models.ticket import Company
 from .base import DataRequired
-
+from app.models.base import db
 
 class AdminLoginForm(Form):
     nickname = StringField('登录名', validators=[DataRequired(), Length(2, 10)])
@@ -55,7 +55,10 @@ class AddTicketForm(Form):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # company选择内容从数据库读取
-        self.company_name.choices = [(c.company_name, c.company_name) for c in Company.query.all()]
+        company_t = db.Table('company')
+        response = company_t.scan()
+        com = response['Items']
+        self.company_name.choices = [(c['company_name'], c['company_name']) for c in com]
 
 
 class AddAdminForm(Form):

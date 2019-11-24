@@ -12,18 +12,39 @@ from app.forms.auth import RegisterForm, LoginForm, ChangeInfoForm
 from app.models.base import db
 from app.models.user import User, get_user
 from . import web
+from datetime import datetime
 
 
 @web.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm(request.form)
     if request.method == 'POST':  # and form.validate():
-        with db.auto_commit():
-            user = User()
-            user.set_attrs(form.data)
-            # user=user.create_user(form)
-            db.session.add(user)
-            return redirect(url_for('web.login'))
+        user_t = db.Table('user')
+        user_t.put_item(
+            Item={
+                'name': form.name.data,
+                'create_time': int(datetime.now().timestamp()),
+                'single_double': form.single_double.data,
+                'company_name': form.company_name.data,
+                'depart_city': form.depart_city.data,
+                'arrive_city': form.arrive_city.data,
+                'depart_time': form.depart_time.data,
+                'depart_date': str(form.depart_date.data),
+                'arrive_time': form.arrive_time.data,
+                'arrive_date': str(form.arrive_date.data),
+                'return_date': str(form.return_date.data),
+                'return_time': form.return_time.data,
+                'first_class_price': form.first_class_price.data,
+                'first_class_num': form.first_class_num.data,
+                'second_class_price': form.second_class_price.data,
+                'second_class_num': form.second_class_num.data,
+                'third_class_price': form.third_class_price.data,
+                'third_class_num': form.third_class_num.data,
+                'depart_airport': form.depart_airport.data,
+                'arrive_airport': form.arrive_airport.data
+            }
+        )
+        return redirect(url_for('web.login'))
     return render_template('web/SignUp.html', form=form)
 
 
