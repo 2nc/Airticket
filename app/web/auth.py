@@ -44,7 +44,7 @@ def register():
             Item={
                 'nickname': form.nickname.data,
                 'create_time': int(datetime.now().timestamp()),
-                'name': form.name.data,
+                'tname': form.name.data,
                 'phone_number': form.phone_number.data,
                 'id_card': form.id_card.data,
                 'password': generate_password_hash(form.password.data),
@@ -88,10 +88,20 @@ def login():
 def personal_info():
     form = ChangeInfoForm(request.form)
     if request.method == 'POST' and form.validate():
-        user = User.query.filter_by(nickname=form.nickname.data).first()
-        changed = user.change_info(form)
-        if changed:
-            return redirect(url_for('web.personal_info'))
+        user_t = db.Table('user')
+        user_t.update_item(
+            Key={
+                'nickname': form.nickname.data,
+            },
+            UpdateExpression='SET tname = :val1, phone_number = :val2, id_card = :val3, password = :val4',
+            ExpressionAttributeValues={
+                ':val1': form.name.data,
+                ':val2': form.phone_number.data,
+                ':val3': form.id_card.data,
+                ':val4': generate_password_hash(form.password.data)
+            }
+        )
+        return redirect(url_for('web.personal_info'))
     user_t = db.Table('user')
     response = user_t.scan(
         FilterExpression=Attr('nickname').eq(session['usernickname'])
@@ -99,7 +109,7 @@ def personal_info():
     user=response['Items'][0]
     form.nickname.default = user['nickname']
     form.password.default = user['password']
-    form.name.default = user['name']
+    form.name.default = user['tname']
     form.id_card.default = user['id_card']
     form.phone_number.default = user['phone_number']
     form.process()
@@ -111,11 +121,20 @@ def personal_info():
 def change_info():
     form = ChangeInfoForm(request.form)
     if request.method == 'POST' and form.validate():
-        user = User.query.filter_by(nickname=form.nickname.data).first()
-        changed = user.change_info(form)
-
-        if changed:
-            return '用户信息更改成功'
+        user_t = db.Table('user')
+        user_t.update_item(
+            Key={
+                'nickname': form.nickname.data,
+            },
+            UpdateExpression='SET tname = :val1, phone_number = :val2, id_card = :val3, password = :val4',
+            ExpressionAttributeValues={
+                ':val1': form.name.data,
+                ':val2': form.phone_number.data,
+                ':val3': form.id_card.data,
+                ':val4': generate_password_hash(form.password.data)
+            }
+        )
+        return '用户信息更改成功'
     return redirect(url_for('web.personal_info'))
 
 
