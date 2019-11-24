@@ -35,10 +35,3 @@ class Admin(Base):
             db.session.add(self)
             return True
 
-
-# from app import login_manager
-#
-#
-# @login_manager.user_loader
-# def get_user(uid):
-#     return Admin.query.get(int(uid))

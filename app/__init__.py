@@ -42,7 +42,6 @@ def create_app():
     if not len(items):
         admin_t.put_item(
             Item={
-                'id': 1,
                 'nickname': 'admin',
                 'role': 'super',
                 'password': generate_password_hash('123456'),
