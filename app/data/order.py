@@ -3,6 +3,8 @@
 # Name:         order
 # Date:         2019/4/12
 # -------------------------------------------------------------------------------
+from datetime import datetime
+
 from app.models.user import User
 
 
@@ -15,12 +17,12 @@ class MyOrder():
     def __parse(self):
         for order in self.raw_order:
             temp_order = {}
-            temp_order['order_id'] = order.order_id
-            temp_order['order_time'] = order.create_datetime
-            temp_order['ticket_type'] = order.ticket_type
-            temp_order['route'] = order.route
-            temp_order['depart_time'] = order.depart_time
-            temp_order['status'] = order.status
+            temp_order['order_id'] = order['order_id']
+            temp_order['order_time'] = datetime.fromtimestamp(order['create_time']).strftime('%Y-%m-%d %H:%M:%S')
+            temp_order['ticket_type'] = order['ticket_type']
+            temp_order['route'] = order['route']
+            temp_order['depart_time'] = order['depart_time']
+            temp_order['status'] = order['status']
             self.order.append(temp_order)
 
 

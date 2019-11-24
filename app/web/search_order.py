@@ -5,7 +5,7 @@
 # -------------------------------------------------------------------------------
 from datetime import datetime
 
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, session
 from flask_login import current_user, login_required
 
 from app.data.order import MyOrder
@@ -48,11 +48,15 @@ def order(plain_id):
     """
     order_id = 'P' + datetime.now().strftime('%Y%m%d%H%M%S')
     form = OrderForm(request.form)
-    ticket = Ticket.query.filter_by(name=plain_id).first()
+    ticket_t = db.Table('ticket')
+    response = ticket_t.scan(
+        FilterExpression=Attr('name').eq(plain_id)
+    )
+    ticket = response['Items'][0]
 
     form.order_id.default = order_id
-    form.route.default = ticket.depart_city + '-' + ticket.arrive_city
-    form.depart_time.default = ticket.depart_date + '-' + ticket.depart_time
+    form.route.default = ticket['depart_city'] + '-' + ticket['arrive_city']
+    form.depart_time.default = ticket['depart_date'] + '-' + ticket['depart_time']
     form.process()
     return render_template('web/OrderInfo.html', form=form)
 
@@ -62,22 +66,28 @@ def order(plain_id):
 def save_order():
     form = OrderForm(request.form)
     if request.method == 'POST':  # and form.validate():
-        with db.auto_commit():
-            order = Order()
-            order.set_attrs(form.data)
-            # userid = current_user.id, user = get_user(userid)
-            order.user_id = current_user.id
-            order.status = '正在处理'
-
-            db.session.add(order)
-            return redirect(url_for('web.my_order'))
+        order_t = db.Table('order')
+        order_t.put_item(
+            Item={
+                'uname': session['usernickname'],
+                'create_time': int(datetime.now().timestamp()),
+                'order_id': form.order_id.data,
+                'route': form.route.data,
+                'depart_time': form.depart_time.data,
+                'ticket_type': form.ticket_type.data,
+                'status': '正在处理'
+            }
+        )
+        return redirect(url_for('web.my_order'))
 
 
 @web.route('/order/my')
 @login_required
 def my_order():
-    user_id = current_user.id
-    order = Order.query.filter_by(user_id=user_id).all()
-
+    order_t = db.Table('order')
+    response = order_t.scan(
+        FilterExpression=Attr('uname').eq(session['usernickname'])
+    )
+    order = response['Items']
     my_order = MyOrder(order).order
     return render_template('web/MyTicket.html', my_order=my_order)
