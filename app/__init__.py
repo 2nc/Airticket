@@ -6,6 +6,8 @@
 from flask import Flask, url_for
 from flask_login import LoginManager
 from flask_mail import Mail
+from flask_s3 import FlaskS3
+import flask_s3
 from werkzeug.security import generate_password_hash
 
 from app.models.admin import Admin
@@ -18,10 +20,15 @@ login_manager = LoginManager()
 mail = Mail()
 
 
+
 def create_app():
     app = Flask(__name__)
 
     app.config.from_object('app.config')
+    s3=FlaskS3()
+    s3.init_app(app) #init flask-s3 to upload static file
+    app.config['FLASKS3_BUCKET_NAME'] = 'a2homework'
+    flask_s3.create_all(app)
 
     register_blueprint(app)
 
@@ -34,6 +41,8 @@ def create_app():
     login_manager.login_view = 'web.login'
     login_manager.login_message = 'Please login or register'
 
+     
+    
     admin_t = db.Table('admin')
     response = admin_t.scan(
         FilterExpression=Attr('nickname').eq('admin')
