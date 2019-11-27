@@ -1,8 +1,3 @@
-# -*- coding: utf-8 -*-#
-# -------------------------------------------------------------------------------
-# Name:         __init__.py
-# Date:         2019/4/9
-# -------------------------------------------------------------------------------
 from flask import Flask, url_for
 from flask_login import LoginManager
 from flask_mail import Mail

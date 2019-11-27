@@ -1,8 +1,4 @@
-# -*- coding: utf-8 -*-#
-# -------------------------------------------------------------------------------
-# Name:         main
-# Date:         2019/4/9
-# -------------------------------------------------------------------------------
+
 from flask import render_template, request, url_for
 
 from app.data.ticket import SearchTicket

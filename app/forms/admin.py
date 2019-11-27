@@ -1,8 +1,4 @@
-# -*- coding: utf-8 -*-#
-# -------------------------------------------------------------------------------
-# Name:         admin
-# Date:         2019/4/11
-# -------------------------------------------------------------------------------
+
 
 from wtforms import StringField, PasswordField, Form, SelectField, SubmitField, RadioField, DateField, DateTimeField, \
     HiddenField, IntegerField
@@ -20,15 +16,13 @@ class AdminLoginForm(Form):
 
 
 class AddTicketForm(Form):
-    date_time = [('全天', '全天'), ('07：00-23:59', '07：00-23:59'), ('09：00-23:59', '09：00-23:59'), ('11：00-23:59', '11：00-23:59'), ('13：00-23:59', '13：00-23:59'),
-                 ('15：00-23:59', '15：00-23:59'), ('17：00-23:59', '17：00-23:59'), ('19：00-23:59', '19：00-23:59'), ('21：00-23:59', '21：00-23:59'), ('23：00-23:59', '23：00-23:59')]
     cities = [('北京', '北京'), ('天津', '天津'), ('上海', '上海'), ('重庆', '重庆'),
               ('广州', '广州'), ('青岛', '青岛'), ('杭州', '杭州'), ('武汉', '武汉')]
 
     id = HiddenField('id')
     submit = SubmitField('Submit')
 
-    single_double = RadioField('航班类型', choices=[('单程', '单程'), ('往返', '往返')])
+    single_double = RadioField('航班类型', choices=[('Single', 'Single'), ('Return', 'Return')])
     name = StringField('航班名称', validators=[Length(2, 10)])
     company_name = SelectField(label="航空公司", validators=[DataRequired("请选择标签")])
 
@@ -36,11 +30,11 @@ class AddTicketForm(Form):
     arrive_city = SelectField("到达城市", choices=cities, validators=[DataRequired(), Length(2, 10)])
 
     depart_date = DateField(label='出发日期', format='%m/%d/%Y')
-    depart_time = SelectField('出发时间', choices=date_time)
+    depart_time = StringField('出发时间')
     arrive_date = DateField(label='到达时期', format='%m/%d/%Y')
-    arrive_time = SelectField('到达时间', choices=date_time)
+    arrive_time = StringField('到达时间')
     return_date = DateField(label='返程日期', format='%m/%d/%Y')
-    return_time = SelectField('返程时间', choices=date_time)
+    return_time = StringField('返程时间')
 
     first_class_price = IntegerField('头等舱价格')
     second_class_price = IntegerField('经济舱价格')

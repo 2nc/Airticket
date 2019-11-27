@@ -1,8 +1,3 @@
-# -*- coding: utf-8 -*-#
-# -------------------------------------------------------------------------------
-# Name:         ticket_manage
-# Date:         2019/4/12
-# -------------------------------------------------------------------------------
 from flask import render_template, request, redirect, url_for, flash
 
 from app.data.admin import CompanyInfo
@@ -72,8 +67,7 @@ def add_ticket():
     form = AddTicketForm(request.form)
     if request.method == 'POST':  # and form.validate():
         ticket_t = db.Table('ticket')
-        ticket_t.put_item(
-            Item={
+        ticket={
                 'name': form.name.data,
                 'create_time': int(datetime.now().timestamp()),
                 'single_double': form.single_double.data,
@@ -84,8 +78,6 @@ def add_ticket():
                 'depart_date': str(form.depart_date.data),
                 'arrive_time': form.arrive_time.data,
                 'arrive_date': str(form.arrive_date.data),
-                'return_date': str(form.return_date.data),
-                'return_time': form.return_time.data,
                 'first_class_price': form.first_class_price.data,
                 'first_class_num': form.first_class_num.data,
                 'second_class_price': form.second_class_price.data,
@@ -95,6 +87,11 @@ def add_ticket():
                 'depart_airport': form.depart_airport.data,
                 'arrive_airport': form.arrive_airport.data
             }
+        if form.single_double.data == 'return':
+            ticket['return_date'] = form.return_date.data
+            ticket['return_time'] = form.return_time.data
+        ticket_t.put_item(
+            Item=ticket
         )
         return redirect(url_for('admin.add_ticket'))
     return render_template('admin/TicketAdd.html', form=form)

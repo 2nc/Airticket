@@ -1,11 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-    File Name：    auth
-    Date：         2019/4/10
-    Description :
-"""
 
-# coding=utf-8
 from wtforms import StringField, PasswordField, Form
 from wtforms.validators import Length, Email, ValidationError, EqualTo
 from .base import DataRequired

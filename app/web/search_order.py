@@ -1,8 +1,4 @@
-# -*- coding: utf-8 -*-#
-# -------------------------------------------------------------------------------
-# Name:         search_order
-# Date:         2019/4/10
-# -------------------------------------------------------------------------------
+
 from datetime import datetime
 
 from flask import render_template, request, redirect, url_for, session

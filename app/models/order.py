@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-    File Name：    order
-    Date：         2019/4/10
-    Description :
-"""
+
 from sqlalchemy.orm import relationship, backref
 
 from app.models.base import Base

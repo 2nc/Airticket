@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-    File Name：    user
-    Date：         2019/4/10
-    Description :
-"""
-
 from flask import render_template, request, redirect, url_for, flash, app, session
 from flask_login import login_user, logout_user, current_user, login_required, UserMixin
 

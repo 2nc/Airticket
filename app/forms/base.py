@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-    File Name：    base
-    Date：         2019/4/10
-    Description :
-"""
+
 
 from flask import request
 from wtforms import Form

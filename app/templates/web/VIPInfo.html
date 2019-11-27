@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>用户中心</title>
 {#    <link rel="stylesheet" href="../../static/VIPstyle.css">#}
-    <link rel="stylesheet" href="../../static/web_style.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='web_style.css')}}">
 </head>
 <body>
 
@@ -44,7 +44,7 @@
     <div class="left" >
         <div class="left_table" style="border: 1px solid #000000">
             <div class="user_img">
-                <img src="../../static/person_1.jpg">
+                <img src="{{url_for('static', filename='person_1.jpg')}}">
             </div>
             <table style="margin: auto">
                 <tr style="height: 30px">
@@ -89,7 +89,7 @@
             </form>
         </div>
         <div class="img">
-            <img src="../../static/2.jpg">
+            <img src="{{url_for('static', filename='2.jpg')}}">
         </div>
     </div>
     <div class="clear"></div>

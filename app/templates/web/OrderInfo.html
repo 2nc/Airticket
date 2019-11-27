@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>机票预订</title>
 {#    <link rel="stylesheet" href="../../static/style.css">#}
-    <link rel="stylesheet" href="../../static/web_style.css"
+    <link rel="stylesheet" href="{{url_for('static', filename='web_style.css')}}">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
@@ -44,7 +44,7 @@
     <div class="body_content">
         <div class="left" style="width: 35%;float: left">
             <div class="img_window">
-                <img src="../../static/2.jpg">
+                <img src="{{url_for('static', filename='2.jpg')}}">
             </div>
         </div>
         <div class="right" style="width: 40%;float: right;margin-right: 15%">

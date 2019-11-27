@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>订票系统</title>
-	<link rel="stylesheet" href="../../static/style.css">
+	<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
@@ -70,8 +70,8 @@
 	</div>
 
   <!--script for portfolio-->
-  <script src="../../static/jquery.min.js"> </script>
-  <script src="../../static/easyResponsiveTabs.js" type="text/javascript"></script>
+  <script src="{{url_for('static', filename='jquery.min.js')}}"> </script>
+  <script src="{{url_for('static', filename='easyResponsiveTabs.js')}}" type="text/javascript"></script>
   <script type="text/javascript">
       $(document).ready(function () {
           $('#horizontalTab').easyResponsiveTabs({
@@ -82,8 +82,8 @@
       });
   </script>
 
-  <link rel="stylesheet" href="../../static/jquery-ui.css" />
-  <script src="../../static/jquery-ui.js"></script>
+  <link rel="stylesheet" href="{{url_for('static', filename='jquery-ui.css')}}" />
+  <script src="{{url_for('static', filename='jquery-ui.js')}}"></script>
   <
   <script>
       $(function() {

@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-    File Name：    search
-    Date：         2019/4/10
-    Description :
-"""
+
 from datetime import datetime
 from wtforms import StringField, PasswordField, Form, SelectField, RadioField, DateField
 from wtforms.validators import Length
