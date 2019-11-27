@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>用户中心</title>
+    <title>Personal Center</title>
 {#    <link rel="stylesheet" href="../../static/VIPstyle.css">#}
     <link rel="stylesheet" href="{{url_for('static', filename='web_style.css')}}">
 </head>
@@ -14,16 +14,16 @@
 
 <div id="head" style="color: black">
     <div class="head_title">
-        <h1 style="color: #212121">用户中心</h1>
+        <h1 style="color: #212121">Personal Center</h1>
     </div>
     <div class="navigation">
         <div id="horizontalTab">
             <ul id="navigation_list">
-                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.index') }}')"><span>网站首页</span></a>
-                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.search') }}')"><span>机票查询</span></a>
-                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.register') }}')"><span>会员注册</span></a>
-                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.login') }}')"><span>会员登陆</span></a>
-                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.personal_info') }}')"><span>会员中心</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.index') }}')"><span>Home</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.search') }}')"><span>Ticket Booking</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.register') }}')"><span>Register</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.login') }}')"><span>Login</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.personal_info') }}')"><span>Personal Center</span></a>
             </ul>
         </div>
     </div>
@@ -31,7 +31,7 @@
         <div class="sap_table">
             <div class="admin-table">
                 <div class="admin-table-list">
-                    <a class="admin-table-item" onclick=AdminSignIn()><span>管理员登录</span></a>
+                    <a class="admin-table-item" onclick=AdminSignIn()><span>Admin System</span></a>
                 </div>
             </div>
         </div>
@@ -48,19 +48,19 @@
             </div>
             <table style="margin: auto">
                 <tr style="height: 30px">
-                    <td style="color: #00bcd4"><a href="{{ url_for('web.personal_info') }}" style="color: #00bcd4"><span>我的信息</span></a></td>
+                    <td style="color: #00bcd4"><a href="{{ url_for('web.personal_info') }}" style="color: #00bcd4"><span>Personal Information</span></a></td>
                 </tr>
                 <tr style="height: 30px">
-                    <td><a href="{{ url_for('web.my_order') }}" style="color: #00bcd4"><span>我的订单</span></a></td>
+                    <td><a href="{{ url_for('web.my_order') }}" style="color: #00bcd4"><span>My Reservation</span></a></td>
                 </tr>
                 <tr style="height: 30px">
-                    <td><a href="{{ url_for('web.logout') }}" style="color: #00bcd4"><span>退出登录</span></a></td>
+                    <td><a href="{{ url_for('web.logout') }}" style="color: #00bcd4"><span>Logout</span></a></td>
                 </tr>
             </table>
         </div>
     </div>
     <div class="right" style="border: 1px solid #000000;height: 600px">
-        <h3 style="font-size: 1em;margin-left: 20px;color:yellowgreen">我的信息</h3>
+        <h3 style="font-size: 1em;margin-left: 20px;color:yellowgreen">Personal Information</h3>
         <div class="signupform">
             <form action="{{ url_for('web.personal_info') }}" method="post" style="margin: 10px">
                 <table style="margin: 10px">

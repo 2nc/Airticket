@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>订票系统</title>
+	<title>Ticket Reservation System</title>
     <link rel="stylesheet" href="{{url_for('static', filename='web_style.css')}}">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -12,16 +12,16 @@
 
 <div id="head">
     <div class="head_title">
-        <h1>FLAY</h1>
+        <h1>Online Reservation</h1>
     </div>
     <div class="navigation">
         <div id="horizontalTab">
             <ul id="navigation_list">
-                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.index') }}')"><span>网站首页</span></a>
-                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.search') }}')"><span>机票查询</span></a>
-                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.register') }}')"><span>会员注册</span></a>
-                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.login') }}')"><span>会员登陆</span></a>
-                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.personal_info') }}')"><span>会员中心</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.index') }}')"><span>Home</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.search') }}')"><span>Ticket Booking</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.register') }}')"><span>Register</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.login') }}')"><span>Login</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.personal_info') }}')"><span>Personal Center</span></a>
             </ul>
         </div>
     </div>
@@ -29,7 +29,7 @@
         <div class="sap_table">
             <div class="admin-table">
                 <div class="admin-table-list">
-                    <a class="admin-table-item" onclick=AdminSignIn()><span>管理员登录</span></a>
+                    <a class="admin-table-item" onclick=AdminSignIn()><span>Admin System</span></a>
                 </div>
             </div>
         </div>
@@ -70,7 +70,7 @@
                      {{ form.single_double }}
                  </div>
                 <div class="index_form_submit">
-                    <input id="index_submit" type="submit" value="搜索航班">
+                    <input id="index_submit" type="submit" value="Search">
                 </div>
             </form>
             <div class="clear"></div>
@@ -80,8 +80,8 @@
 </div>
 
 <div class="bottom">
-    <p>xxx公司机票预订系统</p>
-    <p>版权所有@2019</p>
+    <p>Ticket Reservation System</p>
+    <p>Copyright@2019</p>
 </div>
 
 </div>

@@ -3,45 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{url_for('static', filename='admin_style.css')}}">
-    <title>管理员管理</title>
+    <title>Administrator</title>
 </head>
 <body>
 <div class="head">
-    <h1>后台管理</h1>
+    <h1>System Management</h1>
     <div class="url">
         <ul class="menu">
-            <a class="menu-item" href="{{url_for('web.index')}}"><span>网站首页</span></a>
-            <a class="menu-item" href="{{ url_for('admin.login') }}"><span>退出登录</span></a>
+            <a class="menu-item" href="{{url_for('web.index')}}"><span>Home</span></a>
+            <a class="menu-item" href="{{ url_for('admin.login') }}"><span>Logout</span></a>
         </ul>
     </div>
 </div>
 <div class="left">
     <div class="left-menu">
         <div class="h5head">
-            <h2>管理菜单</h2>
+            <h2>Menu</h2>
         </div>
         <div class="admin_manage">
             <div class="h3head">
-                <h3>管理员管理</h3>
+                <h3>Permission Management</h3>
             </div>
             <div class="admin_manage_content">
                 <ul class="admin_manage_list">
-                    <a class="admin_manage_item" href="{{ url_for('admin.add_admin') }}"><span>添加管理员</span></a>
-                    <a class="admin_manage_item" href="{{ url_for('admin.admin_manage') }}"><span>管理员管理</span></a>
+                    <a class="admin_manage_item" href="{{ url_for('admin.add_admin') }}"><span>Add New Administrator</span></a>
+                    <a class="admin_manage_item" href="{{ url_for('admin.admin_manage') }}"><span>Administrator Management</span></a>
                 </ul>
             </div>
         </div>
         <div class="business_manage">
             <div class="h6head">
-                <h3>机票管理</h3>
+                <h3>Business Management</h3>
             </div>
             <div class="business_menu">
                 <ul class="business_menu_list">
-                    <a class="business_menu_item" href="{{ url_for('admin.add_ticket') }}"><span>添加机票</span></a>
-                    <a class="business_menu_item" href="{{ url_for('admin.company') }}"><span>航空公司管理</span></a>
-{#                    <a class="business_menu_item" href="{{ url_for('admin.test') }}"><span>机票信息管理</span></a>#}
-{#                    <a class="business_menu_item" href="{{ url_for('admin.test') }}"><span>航班信息查询</span></a>#}
-                    <a class="business_menu_item" href="{{ url_for('admin.manage_order') }}"><span>订票管理</span></a>
+                    <a class="business_menu_item" href="{{ url_for('admin.add_ticket') }}"><span>Add New Airline</span></a>
+                    <a class="business_menu_item" href="{{ url_for('admin.company') }}"><span>Company Management</span></a>
+{#                    <a class="business_menu_item" href="{{ url_for('admin.test') }}"><span>Ticket Management</span></a>#}
+{#                    <a class="business_menu_item" href="{{ url_for('admin.test') }}"><span>Flight Information</span></a>#}
+                    <a class="business_menu_item" href="{{ url_for('admin.manage_order') }}"><span>Order Management</span></a>
                 </ul>
             </div>
         </div>
@@ -53,10 +53,10 @@
     <div class="admin_manage">
         <table style="margin:10px;width: 40%">
             <tr>
-                <td>管理员名字</td>
-                <td>管理员类型</td>
-                <td>删除</td>
-{#                <td>修改</td>#}
+                <td>Name</td>
+                <td>Type</td>
+                <td>Delete</td>
+{#                <td>Edit</td>#}
             </tr>
             {% for item in admins %}
             <tr>
@@ -68,14 +68,14 @@
                 <td><form action="{{ url_for('admin.change_info',nickname=item.nickname) }}" method="get">
                 <input type="submit" value="删除">
                 </form></td>
-{#                <td><a methods="get" href="{{ url_for('admin.change_info',nickname=item.nickname) }}"><span>删除</span></a> </td>#}
-{#                <td> <a methods="post" href="{{ url_for('admin.change_info',nickname=item.nickname) }}"><span>修改</span></a> </td>#}
+{#                <td><a methods="get" href="{{ url_for('admin.change_info',nickname=item.nickname) }}"><span>Delete</span></a> </td>#}
+{#                <td> <a methods="post" href="{{ url_for('admin.change_info',nickname=item.nickname) }}"><span>Edit</span></a> </td>#}
             </tr>
             {% endfor %}
         </table>
     </div>
     <div class="admin_add_update">
-        <h5 style="text-align: left; color:#cd0a0a" >添加管理员</h5>
+        <h5 style="text-align: left; color:#cd0a0a" >Add New Administrator</h5>
         <form action="{{ url_for('admin.add_admin') }}" method="post">
             <table style="margin: 10px;width: 40%">
                 <tr>
@@ -85,7 +85,7 @@
                     <td>{{ form.password.label }}</td>  <td>{{ form.password }}</td>
                 </tr>
             </table>
-            <input type="submit" value="提交">
+            <input type="submit" value="submit">
         </form>
     </div>
 </div>

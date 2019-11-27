@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>VIPSignUp</title>
+    <title>Register</title>
     <link rel="stylesheet" href="{{url_for('static', filename='web_style.css')}}">
 </head>
 <body style="">
@@ -12,16 +12,16 @@
 
 <div id="head" style="color: black">
     <div class="head_title">
-        <h1 style="color: #212121">FLAY</h1>
+        <h1 style="color: #212121">Online Reservation</h1>
     </div>
     <div class="navigation">
         <div id="horizontalTab">
             <ul id="navigation_list">
-                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.index') }}')"><span>网站首页</span></a>
-                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.search') }}')"><span>机票查询</span></a>
-                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.register') }}')"><span>会员注册</span></a>
-                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.login') }}')"><span>会员登陆</span></a>
-                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.personal_info') }}')"><span>会员中心</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.index') }}')"><span>Home</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.search') }}')"><span>Ticket Booking</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.register') }}')"><span>Register</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.login') }}')"><span>Login</span></a>
+                <a class="navigation-item" onclick="window.location.replace('{{ url_for('web.personal_info') }}')"><span>Personal Center</span></a>
             </ul>
         </div>
     </div>
@@ -29,7 +29,7 @@
         <div class="sap_table">
             <div class="admin-table">
                 <div class="admin-table-list">
-                    <a class="admin-table-item" onclick=AdminSignIn()><span>管理员登录</span></a>
+                    <a class="admin-table-item" onclick=AdminSignIn()><span>Admin System</span></a>
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
 
 <div class="body_content">
     <div class="title">
-        <h1 style="color:#363636;font-size: 2.1em">VIP用户注册</h1>
+        <h1 style="color:#363636;font-size: 2.1em">Register</h1>
     </div>
     <div class="signup_form">
         <form action="{{ url_for('web.register') }}" method="post" style="text-align: center">
@@ -70,7 +70,7 @@
                     <td>{{ form.phone_number(style="width:300px;height:20px",id="phone_num") }}</td>
                 </tr>
             </table>
-            <input type="submit" value="注册" onclick="return check()">
+            <input type="submit" value="register" onclick="return check()">
         </form>
     </div>
 </div>

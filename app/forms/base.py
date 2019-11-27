@@ -19,7 +19,7 @@ class DataRequired(WTFDataRrequired):
     def __call__(self, form, field):
         if self.message is None:
             field_text = field.label.text
-            self.message = field_text + '不能为空，请填写' + field_text
+            self.message = field_text + 'cannot be empty, please enter'  + field_text
         super(DataRequired, self).__call__(form, field)
 
 

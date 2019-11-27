@@ -3,45 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{url_for('static', filename='admin_style.css')}}">
-    <title>添加机票</title>
+    <title>Add New Airline</title>
 </head>
 <body>
 <div class="head">
-    <h1>后台管理</h1>
+    <h1>System Management</h1>
     <div class="url">
         <ul class="menu">
-            <a class="menu-item" href="{{url_for('web.index')}}"><span>网站首页</span></a>
-            <a class="menu-item" href="{{ url_for('admin.login') }}"><span>退出登录</span></a>
+            <a class="menu-item" href="{{url_for('web.index')}}"><span>Home</span></a>
+            <a class="menu-item" href="{{ url_for('admin.login') }}"><span>Logout</span></a>
         </ul>
     </div>
 </div>
 <div class="left">
     <div class="left-menu">
         <div class="h5head">
-            <h2>管理菜单</h2>
+            <h2>Menu</h2>
         </div>
         <div class="admin_manage">
             <div class="h3head">
-                <h3>管理员管理</h3>
+                <h3>Permission Management</h3>
             </div>
             <div class="admin_manage_content">
                 <ul class="admin_manage_list">
-                    <a class="admin_manage_item" href="{{ url_for('admin.add_admin') }}"><span>添加管理员</span></a>
-                    <a class="admin_manage_item" href="{{ url_for('admin.admin_manage') }}"><span>管理员管理</span></a>
+                    <a class="admin_manage_item" href="{{ url_for('admin.add_admin') }}"><span>Add New Administrator</span></a>
+                    <a class="admin_manage_item" href="{{ url_for('admin.admin_manage') }}"><span>Administrator Management</span></a>
                 </ul>
             </div>
         </div>
         <div class="business_manage">
             <div class="h6head">
-                <h3>机票管理</h3>
+                <h3>Bussiness Management</h3>
             </div>
             <div class="business_menu">
                 <ul class="business_menu_list">
-                    <a class="business_menu_item" href="{{ url_for('admin.add_ticket') }}"><span>添加机票</span></a>
-                    <a class="business_menu_item" href="{{ url_for('admin.company') }}"><span>航空公司管理</span></a>
-{#                    <a class="business_menu_item" href="{{ url_for('admin.test') }}"><span>机票信息管理</span></a>#}
-{#                    <a class="business_menu_item" href="{{ url_for('admin.test') }}"><span>航班信息查询</span></a>#}
-                    <a class="business_menu_item" href="{{ url_for('admin.manage_order') }}"><span>订票管理</span></a>
+                    <a class="business_menu_item" href="{{ url_for('admin.add_ticket') }}"><span>Add New Airline</span></a>
+                    <a class="business_menu_item" href="{{ url_for('admin.company') }}"><span>Company Management</span></a>
+{#                    <a class="business_menu_item" href="{{ url_for('admin.test') }}"><span>Ticket Management</span></a>#}
+{#                    <a class="business_menu_item" href="{{ url_for('admin.test') }}"><span>Flight Information</span></a>#}
+                    <a class="business_menu_item" href="{{ url_for('admin.manage_order') }}"><span>Order Management</span></a>
                 </ul>
             </div>
         </div>
@@ -49,7 +49,7 @@
 </div>
 <div class="right">
     <div class="right_title">
-{#        <h3>增添/修改机票</h3>#}
+{#        <h3>Add New Airline</h3>#}
     </div>
     <div class="changeform">
         <form action="{{ url_for('admin.add_ticket') }}" method="post" style="width: 80%">
@@ -134,7 +134,7 @@
 
 
             </table>
-            <input type="submit" value="提交">
+            <input type="submit" value="submit">
         </form>
     </div>
 </div>

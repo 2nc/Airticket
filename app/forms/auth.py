@@ -6,32 +6,32 @@ from app.models.user import User
 
 
 class LoginForm(Form):
-    nickname = StringField('用户名', validators=[DataRequired()])
-    password = PasswordField('密码', validators=[
-        DataRequired(message='密码不可以为空，请输入你的密码')])
+    nickname = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[
+        DataRequired(message='Please enter your password.')])
 
 
 class RegisterForm(Form):
-    nickname = StringField('用户名', validators=[DataRequired(), Length(2, 10)])
-    password = PasswordField('密码', validators=[DataRequired(),
+    nickname = StringField('Username', validators=[DataRequired(), Length(2, 10)])
+    password = PasswordField('Password', validators=[DataRequired(),
                                                EqualTo('repeat_password'), Length(6, 20)])
-    repeat_password = PasswordField('重复密码', validators=[DataRequired(), Length(6, 20)])
-    name = StringField('姓名', validators=[DataRequired(), Length(1, 10)])
-    id_card = StringField('身份证号码', validators=[DataRequired()])
-    phone_number = StringField('手机号码', validators=[DataRequired()])
+    repeat_password = PasswordField('Confirm Password', validators=[DataRequired(), Length(6, 20)])
+    name = StringField('Name', validators=[DataRequired(), Length(1, 10)])
+    id_card = StringField('ID Number', validators=[DataRequired()])
+    phone_number = StringField('Phone', validators=[DataRequired()])
 
     def validate_id_card(self, field):
         if User.query.filter_by(id_card=field.data).first():
-            raise ValidationError('身份证号已被注册')
+            raise ValidationError('Your ID have been registered.')
 
     def validate_nickname(self, field):
         if User.query.filter_by(nickname=field.data).first():
-            raise ValidationError('昵称已存在')
+            raise ValidationError('Username exists.')
 
 
 class ChangeInfoForm(Form):
-    nickname = StringField('用户名', validators=[DataRequired(), Length(2, 10)])
-    password = PasswordField('密码', validators=[DataRequired(), Length(6, 20)])
-    name = StringField('姓名', validators=[DataRequired(), Length(1, 10)])
-    id_card = StringField('身份证号码', validators=[DataRequired()])
-    phone_number = StringField('手机号码', validators=[DataRequired()])
+    nickname = StringField('Username', validators=[DataRequired(), Length(2, 10)])
+    password = PasswordField('Password', validators=[DataRequired(), Length(6, 20)])
+    name = StringField('Name', validators=[DataRequired(), Length(1, 10)])
+    id_card = StringField('ID Number', validators=[DataRequired()])
+    phone_number = StringField('Phone Number', validators=[DataRequired()])

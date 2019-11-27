@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>订票系统</title>
+	<title>Ticket Reservation System</title>
 	<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -13,22 +13,22 @@
     <div class="sap_table">
         <div class="admin-table">
             <div class="admin-table-list">
-                <a class="admin-table-item" onclick="AdminSignIn()"><span>管理员登录</span></a>
+                <a class="admin-table-item" onclick="AdminSignIn()"><span>Admin System</span></a>
             </div>
         </div>
     </div>
  </div>
 
- <h1>航空订票系统</h1>
+ <h1>Airline Reservation System</h1>
 	<div class="main-agileinfo">
 		<div class="sap_tabs">
 			<div id="horizontalTab">
 				<ul class="resp-tabs-list">
-                    <a class="resp-tab-item" onclick="window.location.replace('index.html')"><span>网站首页</span></a>
-                    <a class="resp-tab-item" onclick="window.location.replace('TicketSearch.html')"><span>机票查询</span></a>
-                    <a class="resp-tab-item" onclick="window.location.replace('Signup.html')"><span>会员注册</span></a>
-                    <a class="resp-tab-item" onclick="window.location.replace('VIPSignIn.html')"><span>会员登陆</span></a>
-                    <a class="resp-tab-item" onclick="window.location.replace('VIPCenter.html')"><span>会员中心</span></a>
+                    <a class="resp-tab-item" onclick="window.location.replace('index.html')"><span>Home</span></a>
+                    <a class="resp-tab-item" onclick="window.location.replace('TicketSearch.html')"><span>Ticket Booking</span></a>
+                    <a class="resp-tab-item" onclick="window.location.replace('Signup.html')"><span>Register</span></a>
+                    <a class="resp-tab-item" onclick="window.location.replace('VIPSignIn.html')"><span>Login</span></a>
+                    <a class="resp-tab-item" onclick="window.location.replace('VIPCenter.html')"><span>Personal Center</span></a>
 				</ul>
 				<div class="clearfix"> </div>
 				<div class="resp-tabs-container">
@@ -36,13 +36,14 @@
 						<form method="post">
 
 							<div class="from">
+								<h3>From: </h3>
                                 <h3>{{ form.depart_city.label}}</h3>
                                 {{form.depart_city()}}
 								<input type="text" name="city" class="city1" placeholder="Type Departure City" required="">
 							</div>
 
 							<div class="to">
-								<h3>到达机场</h3>
+								<h3>To: </h3>
                                 <h3>{{form.arrive_city.label}}</h3>
                                 {{form.arrive_city()}}
 								<input type="text" name="city" class="city2" placeholder="Type Destination City" required="">
@@ -50,7 +51,7 @@
 							<div class="clear"></div>
 							<div class="date">
 								<div class="depart">
-									<h3>出发时间</h3>
+									<h3>Departure Time</h3>
                                     <h3>{{form.depart_date.label}}</h3>
                                     {{form.depart_date()}}
 									<input  id="datepicker" name="Text" type="text" value="mm/dd/yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="">
@@ -61,7 +62,7 @@
 								<div class="clear"></div>
 							</div>
 							<div class="clear"></div>
-							<input type="submit" value="搜索航班">
+							<input type="submit" value="Search">
 						</form>
 					</div>
 				</div>
