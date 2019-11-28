@@ -23,5 +23,5 @@ class OrderForm(Form):
     depart_time = StringField('Departure Time', validators=[DataRequired()])
     ticket_type = SelectField('Ticket Type', choices=[('Economy', 'Economy'), ('Business', 'Business'), ('First-class', 'First-class')])
     name = StringField('Name', validators=[DataRequired(), Length(1, 10)])
-    phone_number = StringField('Phone Number', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired()])
     id_card = StringField('ID Number', validators=[DataRequired()])

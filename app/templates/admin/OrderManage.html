@@ -59,7 +59,7 @@
                 <td> Depart Time </td>
                 <td> Ticket Type </td>
                 <td> Passenger Name </td>
-                <td> Passenger Phone </td>
+                <td> Passenger Email </td>
                 <td> Passenger ID </td>
                 <td> Status </td>
                 <td> Confirm </td>
@@ -72,7 +72,7 @@
                 <td>{{ item.depart_time }}</td>
                 <td>{{ item.ticket_type }}</td>
                 <td>{{ item.uname }}</td>
-                <td>{{ item.phone_number }}</td>
+                <td>{{ item.email }}</td>
                 <td>{{ item.id_card }}</td>
                 <td>{{ item.status }}</td>
                 <td><form action="{{ url_for('admin.manage_order',order_id = item.order_id) }}" method="post">

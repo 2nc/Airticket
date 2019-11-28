@@ -70,7 +70,7 @@ def save_order():
                 'depart_time': form.depart_time.data,
                 'ticket_type': form.ticket_type.data,
                 'order_status': 'Processing',
-                'phone_number': form.phone_number.data,
+                'email': form.email.data,
                 'id_card': form.id_card.data
             }
         )

@@ -17,7 +17,7 @@ class RegisterForm(Form):
     repeat_password = PasswordField('Confirm Password', validators=[DataRequired(), Length(6, 20)])
     name = StringField('Name', validators=[DataRequired(), Length(1, 10)])
     id_card = StringField('ID Number', validators=[DataRequired()])
-    phone_number = StringField('Phone', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired()])
 
 
 
@@ -26,4 +26,4 @@ class ChangeInfoForm(Form):
     password = PasswordField('Password', validators=[DataRequired(), Length(6, 20)])
     name = StringField('Name', validators=[DataRequired(), Length(1, 10)])
     id_card = StringField('ID Number', validators=[DataRequired()])
-    phone_number = StringField('Phone Number', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired()])

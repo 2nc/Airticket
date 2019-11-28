@@ -37,7 +37,7 @@ def register():
                 'nickname': form.nickname.data,
                 'create_time': int(datetime.now().timestamp()),
                 'tname': form.name.data,
-                'phone_number': form.phone_number.data,
+                'email': form.email.data,
                 'id_card': form.id_card.data,
                 'password': generate_password_hash(form.password.data),
             }
@@ -85,10 +85,10 @@ def personal_info():
             Key={
                 'nickname': form.nickname.data,
             },
-            UpdateExpression='SET tname = :val1, phone_number = :val2, id_card = :val3, password = :val4',
+            UpdateExpression='SET tname = :val1, email = :val2, id_card = :val3, password = :val4',
             ExpressionAttributeValues={
                 ':val1': form.name.data,
-                ':val2': form.phone_number.data,
+                ':val2': form.email.data,
                 ':val3': form.id_card.data,
                 ':val4': generate_password_hash(form.password.data)
             }
@@ -103,7 +103,7 @@ def personal_info():
     form.password.default = user['password']
     form.name.default = user['tname']
     form.id_card.default = user['id_card']
-    form.phone_number.default = user['phone_number']
+    form.email.default = user['email']
     form.process()
     return render_template('web/VIPInfo.html', form=form)
 
@@ -118,10 +118,10 @@ def change_info():
             Key={
                 'nickname': form.nickname.data,
             },
-            UpdateExpression='SET tname = :val1, phone_number = :val2, id_card = :val3, password = :val4',
+            UpdateExpression='SET tname = :val1, email = :val2, id_card = :val3, password = :val4',
             ExpressionAttributeValues={
                 ':val1': form.name.data,
-                ':val2': form.phone_number.data,
+                ':val2': form.email.data,
                 ':val3': form.id_card.data,
                 ':val4': generate_password_hash(form.password.data)
             }
