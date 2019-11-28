@@ -30,7 +30,7 @@ def search():
         tickets = SearchTicket(tickets).tickets  # 列表包含着字典
         return render_template('web/SearchResults.html', tickets=tickets, form=form)
 
-    form.single_double.default = '往返'
+    form.single_double.default = 'Round-trip'
     form.process()
     return render_template('web/SearchResults.html', form=form, tickets=[])
 
@@ -71,7 +71,7 @@ def save_order():
                 'route': form.route.data,
                 'depart_time': form.depart_time.data,
                 'ticket_type': form.ticket_type.data,
-                'order_status': '正在处理'
+                'order_status': 'Processing'
             }
         )
         return redirect(url_for('web.my_order'))
