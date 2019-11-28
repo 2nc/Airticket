@@ -52,7 +52,7 @@
         <h3>Order Management</h3>
     </div>
     <div class="ticke_order_req">
-        <table  style="margin: 10px;width: 70%">
+        <table  style="margin: 10px;width: 100%">
             <tr>
                 <td> Order ID </td>
                 <td> Route </td>
@@ -61,6 +61,7 @@
                 <td> Passenger Name </td>
                 <td> Passenger Phone </td>
                 <td> Passenger ID </td>
+                <td> Status </td>
                 <td> Confirm </td>
                 <td> Delete </td>
             </tr>
@@ -70,7 +71,7 @@
                 <td>{{ item.route }}</td>
                 <td>{{ item.depart_time }}</td>
                 <td>{{ item.ticket_type }}</td>
-                <td>{{ item.name }}</td>
+                <td>{{ item.uname }}</td>
                 <td>{{ item.phone_number }}</td>
                 <td>{{ item.id_card }}</td>
                 <td>{{ item.status }}</td>

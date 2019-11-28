@@ -19,11 +19,10 @@ def search():
     if request.method == 'POST':  # and form.validate():
         ticket_t = db.Table('ticket')
         response = ticket_t.scan(
-            FilterExpression=Attr('single_double').eq(form.single_double.data) and
-                             Attr('depart_date').eq(str(form.depart_date.data)) and
-                             Attr('depart_city').eq(form.depart_city.data) and
-                             Attr('arrive_city').eq(form.arrive_city.data),
-
+            FilterExpression=#Attr('single_double').eq(form.single_double.data) and
+                            Attr('depart_city').eq(form.depart_city.data) and
+                            Attr('arrive_city').eq(form.arrive_city.data) and
+                            Attr('depart_date').eq(str(form.depart_date.data))
         )
         tickets = response['Items']
         tickets = SearchTicket(tickets).tickets  # 列表包含着字典
@@ -70,7 +69,9 @@ def save_order():
                 'route': form.route.data,
                 'depart_time': form.depart_time.data,
                 'ticket_type': form.ticket_type.data,
-                'order_status': 'Processing'
+                'order_status': 'Processing',
+                'phone_number': form.phone_number.data,
+                'id_card': form.id_card.data
             }
         )
         return redirect(url_for('web.my_order'))

@@ -54,10 +54,12 @@
     <div class="changeform">
         <form action="{{ url_for('admin.add_ticket') }}" method="post" style="width: 80%">
             <table style="margin: 10px;width: 70%">
+                {#
                 <tr style="height: 30px">
                     <td>{{ form.single_double.label }}</td>
                     <td>{{ form.single_double() }}</td>
                 </tr>
+                #}
                 <tr style="height: 30px">
                     <td>{{ form.name.label }}</td>
                     <td>{{ form.name(style="width:196px") }}</td>
@@ -91,6 +93,7 @@
                     <td>{{ form.arrive_time.label }}</td>
                     <td>{{ form.arrive_time(style="width:200px") }}</td>
                 </tr>
+                {#
                 <tr style="height: 30px">
                     <td>{{ form.return_date.label }}</td>
                     <td>{{ form.return_date(style="width:196px",id="datepicker2",onfocus="this.value = '';",onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}",required="") }}</td>
@@ -99,6 +102,7 @@
                     <td>{{ form.return_time.label }}</td>
                     <td>{{ form.return_time(style="width:200px") }}</td>
                 </tr>
+                #}
                 <tr style="height: 30px">
                     <td>{{ form.first_class_price.label }}</td>
                     <td>{{ form.first_class_price(style="width:196px") }}</td>

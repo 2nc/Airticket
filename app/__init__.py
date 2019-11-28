@@ -22,7 +22,7 @@ def create_app():
     s3=FlaskS3()
     s3.init_app(app) #init flask-s3 to upload static file
     app.config['FLASKS3_BUCKET_NAME'] = 'a2homework'
-    flask_s3.create_all(app)
+    #flask_s3.create_all(app)
 
     register_blueprint(app)
 
