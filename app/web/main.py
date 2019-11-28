@@ -3,7 +3,6 @@ from flask import render_template, request, url_for
 
 from app.data.ticket import SearchTicket
 from app.forms.search_order import SearchForm
-from app.models.ticket import Ticket
 from . import web
 
 

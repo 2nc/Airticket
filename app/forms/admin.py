@@ -4,9 +4,10 @@ from wtforms import StringField, PasswordField, Form, SelectField, SubmitField, 
     HiddenField, IntegerField
 from wtforms.validators import Length, Email, ValidationError, EqualTo, Required
 
-from app.models.ticket import Company
 from .base import DataRequired
-from app.models.base import db
+import boto3
+
+db = boto3.resource('dynamodb')
 
 class AdminLoginForm(Form):
     nickname = StringField('Usermane', validators=[DataRequired(), Length(2, 10)])

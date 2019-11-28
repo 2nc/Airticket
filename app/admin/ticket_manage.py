@@ -3,9 +3,7 @@ from flask import render_template, request, redirect, url_for, flash
 from app.data.admin import CompanyInfo
 from app.data.order import ManageOrder
 from app.forms.admin import AddCompanyForm, AddTicketForm
-from app.models.base import db
-from app.models.order import Order
-from app.models.ticket import Company, Ticket
+from app.config import db
 from . import admin
 from datetime import datetime
 from boto3.dynamodb.conditions import Key, Attr

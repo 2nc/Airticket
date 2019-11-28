@@ -2,8 +2,7 @@ from flask import render_template, request, redirect, url_for, flash, app, sessi
 from flask_login import login_user, logout_user, current_user, login_required, UserMixin
 
 from app.forms.auth import RegisterForm, LoginForm, ChangeInfoForm
-from app.models.base import db
-from app.models.user import User
+from app.config import db
 from . import web
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash

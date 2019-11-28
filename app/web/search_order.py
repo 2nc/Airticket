@@ -7,12 +7,11 @@ from flask_login import current_user, login_required
 from app.data.order import MyOrder
 from app.data.ticket import SearchTicket
 from app.forms.search_order import SearchForm, OrderForm
-from app.models.base import db
-from app.models.order import Order
-from app.models.ticket import Ticket
 from . import web
 from boto3.dynamodb.conditions import Key, Attr
+import boto3
 
+db = boto3.resource('dynamodb')
 
 @web.route('/search', methods=['GET', 'POST'])
 def search():

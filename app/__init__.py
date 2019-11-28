@@ -1,18 +1,17 @@
 from flask import Flask, url_for
 from flask_login import LoginManager
-from flask_mail import Mail
 from flask_s3 import FlaskS3
 import flask_s3
 from werkzeug.security import generate_password_hash
+from app.config import db
 
-from app.models.admin import Admin
-from app.models.base import db
+
 
 from boto3.dynamodb.conditions import Key, Attr
 from datetime import datetime
 
 login_manager = LoginManager()
-mail = Mail()
+
 
 
 
@@ -27,10 +26,6 @@ def create_app():
 
     register_blueprint(app)
 
-    #db.init_app(app)
-
-
-    mail.init_app(app)
 
     login_manager.init_app(app)
     login_manager.login_view = 'web.login'

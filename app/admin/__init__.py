@@ -2,9 +2,6 @@ from flask import Blueprint, render_template
 from werkzeug.security import generate_password_hash
 
 
-from app.models.admin import Admin
-from app.models.base import db
-
 admin = Blueprint('admin', __name__)
 # 下面不加也行
 

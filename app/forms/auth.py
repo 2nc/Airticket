@@ -2,7 +2,6 @@
 from wtforms import StringField, PasswordField, Form
 from wtforms.validators import Length, Email, ValidationError, EqualTo
 from .base import DataRequired
-from app.models.user import User
 
 
 class LoginForm(Form):
@@ -20,13 +19,6 @@ class RegisterForm(Form):
     id_card = StringField('ID Number', validators=[DataRequired()])
     phone_number = StringField('Phone', validators=[DataRequired()])
 
-    def validate_id_card(self, field):
-        if User.query.filter_by(id_card=field.data).first():
-            raise ValidationError('Your ID have been registered.')
-
-    def validate_nickname(self, field):
-        if User.query.filter_by(nickname=field.data).first():
-            raise ValidationError('Username exists.')
 
 
 class ChangeInfoForm(Form):

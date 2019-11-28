@@ -3,8 +3,8 @@ from flask import render_template, request, redirect, url_for
 from app.data.admin import AdminInfo
 from app.forms.admin import AddAdminForm
 from app.forms.auth import LoginForm
-from app.models.admin import Admin
-from app.models.base import db
+
+from app.config import db
 from . import admin
 
 from boto3.dynamodb.conditions import Key, Attr
