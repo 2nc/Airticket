@@ -63,10 +63,10 @@
                 <td>{{ item.nickname}}</td>
                 <td>{{ item.role }}</td>
 {#                <td><form action="{{ url_for('admin.change_info',nickname=item.nickname) }}" method="post">#}
-{#                <input type="submit" value="修改">#}
+{#                <input type="submit" value="Edit">#}
 {#                </form></td>#}
                 <td><form action="{{ url_for('admin.change_info',nickname=item.nickname) }}" method="get">
-                <input type="submit" value="删除">
+                <input type="submit" value="Delete">
                 </form></td>
 {#                <td><a methods="get" href="{{ url_for('admin.change_info',nickname=item.nickname) }}"><span>Delete</span></a> </td>#}
 {#                <td> <a methods="post" href="{{ url_for('admin.change_info',nickname=item.nickname) }}"><span>Edit</span></a> </td>#}

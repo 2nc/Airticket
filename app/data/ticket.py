@@ -16,9 +16,9 @@ class SearchTicket():
             temp_ticket['depart_airport'] = ticket['depart_airport']
             temp_ticket['arrive_airport'] = ticket['arrive_airport']
 
-            temp_ticket['third_class_pric'] = '经济舱：' + str(ticket['third_class_price']) + '元'
-            temp_ticket['second_class_pric'] = '商务舱：' + str(ticket['second_class_price']) + '元'
-            temp_ticket['first_class_pric'] = '头等舱：' + str(ticket['first_class_price']) + '元'
+            temp_ticket['third_class_pric'] = 'Economy: ' + str(ticket['third_class_price']) + 'CAD'
+            temp_ticket['second_class_pric'] = 'Business: ' + str(ticket['second_class_price']) + 'CAD'
+            temp_ticket['first_class_pric'] = 'First-class: ' + str(ticket['first_class_price']) + 'CAD'
 
             temp_ticket['depart_city'] = ticket['depart_city']
             temp_ticket['arrive_city'] = ticket['arrive_city']

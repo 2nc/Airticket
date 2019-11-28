@@ -95,11 +95,6 @@
     function check_phone() {
         var phone = document.getElementById('phone_num').value;
         var re;
-        re = /^(1[358][0-9]{9})$/;
-        if(re.test(phone)==false){
-            alert('请输入正确的电话号码')
-            return false;
-        }
         return true;
     }
     function check() {
@@ -107,34 +102,6 @@
         var iSum=0 ;
         var pwd=document.getElementById('pwd').value;
         var npwd = document.getElementById('npwd').value;
-
-        if(pwd!=npwd){
-            alert('请输入一致的密码')
-            return false;
-        }
-        if(!check_phone()){
-            return false;
-        }
-        if(!/^\d{17}(\d|x)$/i.test(sId)){
-            alert('你输入的身份证长度或格式错误');
-            return false;
-        }
-        sId=sId.replace(/x$/i,"a");
-        if(aCity[parseInt(sId.substr(0,2))]==null){
-            alert('你输入的身份证长度或格式错误');
-            return false;
-        }
-        sBirthday=sId.substr(6,4)+"-"+Number(sId.substr(10,2))+"-"+Number(sId.substr(12,2));
-        var d=new Date(sBirthday.replace(/-/g,"/")) ;
-        if(sBirthday!=(d.getFullYear()+"-"+ (d.getMonth()+1) + "-" + d.getDate())){
-            alert('你输入的身份证长度或格式错误');
-            return false;
-        }
-        for(var i = 17;i>=0;i --) iSum += (Math.pow(2,i) % 11) * parseInt(sId.charAt(17 - i),11) ;
-        if(iSum%11!=1){
-            alert('你输入的身份证长度或格式错误');
-            return false;
-        }
         //aCity[parseInt(sId.substr(0,2))]+","+sBirthday+","+(sId.substr(16,1)%2?"男":"女");//此次还可以判断出输入的身份证号的人性别
         return true;
         
