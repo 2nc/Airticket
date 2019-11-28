@@ -67,7 +67,7 @@
                 </tr>
                 <tr style="height: 30px">
                     <td style="color:#363636;text-align: center">{{ form.email.label }}</td>
-                    <td>{{ form.email(style="width:300px;height:20px",id="phone_num") }}</td>
+                    <td>{{ form.email(style="width:300px;height:20px",id="mail") }}</td>
                 </tr>
             </table>
             <input type="submit" value="register" onclick="return check()">
@@ -92,9 +92,9 @@
 	    window.location.replace('{{ url_for('admin.login') }}');
 
     }
-    function check_phone() {
-        var phone = document.getElementById('phone_num').value;
-        var re;
+    function check_mail() {
+        var mail = document.getElementById('mail').value;
+        var re = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
         return true;
     }
     function check() {
@@ -103,6 +103,8 @@
         var pwd=document.getElementById('pwd').value;
         var npwd = document.getElementById('npwd').value;
         //aCity[parseInt(sId.substr(0,2))]+","+sBirthday+","+(sId.substr(16,1)%2?"男":"女");//此次还可以判断出输入的身份证号的人性别
+
+
         return true;
         
     }
