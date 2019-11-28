@@ -136,12 +136,13 @@ h1{
 	margin-bottom: 0px;
 	padding: 0px;
 	clear: left;
+    width: 20%;
 }
 
 .SearchResultSearch{
 	height: auto;
 	margin: 0px;
-	width: 100%;
+	width: 80%;
 	/*background: rgba(227, 246, 255, 0.7);*/
 	padding: 0px;
 }

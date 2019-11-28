@@ -86,7 +86,6 @@ h1{
 }
 .content_left{
     width: 38%;
-    height: auto;
     float: left;
 }
 .img_window{
@@ -107,7 +106,7 @@ img{
 }
 .content_right{
     float: right;
-    width: 35%;
+    width: 50%;
     color: #b1b1b1;
 }
 .content_form{
@@ -252,7 +251,7 @@ input[type="submit"]:hover  {
     display: inline-block;
 }
 .img{
-    margin-right: 50px;
+    margin-right: 200px;
     margin-top: 10px;
     width: 40%;
     height: 300px;
