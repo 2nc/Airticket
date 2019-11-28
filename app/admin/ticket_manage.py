@@ -50,7 +50,7 @@ def change_company(company_name):
     )
     tic = response['Items']
     if len(tic):
-        flash("WARNING! There are related airlines!")
+        flash("WARNING!  该公司有关联的机票或订单，不能删除")
         return redirect(url_for('admin.company'))
 
     company_t.delete_item(
@@ -108,7 +108,7 @@ def manage_order():
             },
             UpdateExpression='SET order_status = :val1',
             ExpressionAttributeValues={
-                ':val1': 'Completed'
+                ':val1': '已经处理'
             }
         )
         return redirect(url_for('admin.manage_order'))

@@ -72,7 +72,7 @@ def login():
                 next = url_for('web.personal_info')
             return redirect(next)
         else:
-            flash('Account does not exist or wrong password')
+            flash('账号不存在或密码错误')
     return render_template('web/VIPSignIn.html', form=form)
 
 

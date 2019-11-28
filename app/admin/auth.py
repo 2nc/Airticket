@@ -73,7 +73,7 @@ def change_info(nickname):
     if request.method == 'POST':  # and form.validate():
         changed = ad.change_info(form)
         if changed:
-            print('Succeed!')
+            print('管理员信息修改成功')
     if request.method == 'GET':
         admin_t.delete_item(
             Key={
