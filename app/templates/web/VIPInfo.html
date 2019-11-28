@@ -82,7 +82,7 @@
                     </tr>
                     <tr style="height: 30px;text-align: center">
                         <td style="color: #212121">{{ form.email.label }}</td>
-                        <td> {{ form.email(id="email") }}</td>
+                        <td> {{ form.email(id="mail") }}</td>
                     </tr>
                 </table>
                 <input type="submit" value="修改" style="margin-left: 100px " onclick="return check()">
@@ -108,8 +108,8 @@
 	    window.location.replace('{{ url_for('admin.login') }}');
 
     }
-    function check_phone() {
-        var phone = document.getElementById('phone_num').value;
+    function check_mail() {
+        var mail = document.getElementById('mail').value;
         var re;
         return true;
     }
