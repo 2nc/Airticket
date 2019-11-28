@@ -69,7 +69,7 @@
                          </tr>
                          <tr style="height: 30px">
                              <td style="color: #212121">{{ form.email.label }}</td>
-                             <td>{{ form.email(id="email") }}</td>
+                             <td>{{ form.email(id="mail") }}</td>
                          </tr>
                          <tr style="height: 30px">
                              <td style="color: #212121">{{ form.id_card.label }}</td>
@@ -103,10 +103,10 @@
 	    window.location.replace('{{ url_for('admin.login') }}');
 
     }
-    function check_phone() {
-        var phone = document.getElementById('phone_num').value;
+    function check_mail() {
+        var mail = document.getElementById('mail').value;
         var re;
-        re = /^(1[358][0-9]{9})$/;
+        re = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
         return true;
     }
     function check() {
