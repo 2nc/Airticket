@@ -9,7 +9,7 @@ from . import web
 @web.route('/')
 def index():
     form = SearchForm(request.form)
-    form.single_double.default = '往返'
+    form.single_double.default = 'Round-Trip'
     form.process()
     return render_template('web/index.html', form=form)
 

@@ -23,7 +23,7 @@ class AddTicketForm(Form):
     id = HiddenField('id')
     submit = SubmitField('Submit')
 
-    single_double = RadioField('Trip Type', choices=[('Single', 'Single'), ('Return', 'Return')])
+    single_double = RadioField('Trip Type', choices=[('One-way', 'One-way'), ('Round-trip', 'Round-trip')])
     name = StringField('Airline', validators=[Length(2, 10)])
     company_name = SelectField(label="Airline Company", validators=[DataRequired("Please choose")])
 
@@ -31,11 +31,11 @@ class AddTicketForm(Form):
     arrive_city = SelectField("To:", choices=cities, validators=[DataRequired(), Length(2, 10)])
 
     depart_date = DateField(label='Departure Date', format='%m/%d/%Y')
-    depart_time = StringField('Departire Date')
+    depart_time = StringField('Departire Time')
     arrive_date = DateField(label='Arrival Date', format='%m/%d/%Y')
-    arrive_time = StringField('Arrival Date')
+    arrive_time = StringField('Arrival Time')
     return_date = DateField(label='Return Date', format='%m/%d/%Y')
-    return_time = StringField('Return Date')
+    return_time = StringField('Return Time')
 
     first_class_price = IntegerField('First Class Price')
     second_class_price = IntegerField('Business Class Price')
