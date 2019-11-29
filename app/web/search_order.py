@@ -69,7 +69,7 @@ def save_order():
                 'route': form.route.data,
                 'depart_time': form.depart_time.data,
                 'ticket_type': form.ticket_type.data,
-                'order_status': 'Processing',
+                'order_status': 'Completed',
                 'email': form.email.data,
                 'id_card': form.id_card.data
             }
