@@ -20,8 +20,8 @@ def search():
         ticket_t = db.Table('ticket')
         response = ticket_t.scan(
             FilterExpression=#Attr('single_double').eq(form.single_double.data) and
-                            Attr('depart_city').eq(form.depart_city.data) and
-                            Attr('arrive_city').eq(form.arrive_city.data) and
+                            Attr('depart_city').eq(form.depart_city.data)&
+                            Attr('arrive_city').eq(form.arrive_city.data)&
                             Attr('depart_date').eq(str(form.depart_date.data))
         )
         tickets = response['Items']

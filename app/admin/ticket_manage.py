@@ -14,7 +14,6 @@ def test():
     return 'test'
 
 
-# 请求和添加公司
 @admin.route('/admin/company', methods=['GET', 'POST'])
 def company():
     form = AddCompanyForm(request.form)
@@ -33,7 +32,7 @@ def company():
     return render_template('admin/CompanyManage.html', form=form, companys=companys)
 
 
-# 修改删除公司
+
 @admin.route('/admin/company/<company_name>', methods=['GET', 'POST'])
 def change_company(company_name):
     # form = AddCompanyForm(request.form)
@@ -59,7 +58,7 @@ def change_company(company_name):
     return redirect(url_for('admin.company'))
 
 
-# 添加机票
+
 @admin.route('/admin/ticket', methods=['GET', 'POST'])
 def add_ticket():
     form = AddTicketForm(request.form)
