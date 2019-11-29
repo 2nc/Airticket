@@ -118,13 +118,13 @@ img{
 .from{
     float: left;
     width: 40%;
-    color: #b1b1b1;
+    color: #686868;
     margin-left: 20px;
 }
 .input_from_city{
     width: 150px;
     height: 30px;
-    color: #b1b1b1;
+    color: #686868;
 
 }
 .to{
@@ -139,7 +139,7 @@ img{
 .input_to_city{
     width: 150px;
     height: 30px;
-    color: #b1b1b1;
+    color: #686868;
 
 }
 .date{
@@ -151,7 +151,7 @@ img{
 .depart_time{
     width: 160px;
     height: 30px;
-    color: #b1b1b1;
+    color: #686868;
 }
 .single_double{
     float: left;

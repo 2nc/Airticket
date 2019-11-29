@@ -86,13 +86,13 @@ h1,h2,h3,h4,h5,h6{
     transition: all 0.3s;
     text-transform: uppercase;
     margin: 0 1.2em 0;
-	color:#6A67CE;
+	color:#C0C0C0;
 	padding:7px 15px;
 }
 
 h3 {
     font-size: 16px;
-    color:#FFC107;
+    color:#FFCC99;
     margin-bottom: 7px;
 }
 .right_title{
