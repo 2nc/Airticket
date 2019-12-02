@@ -122,7 +122,7 @@ img{
     margin-left: 20px;
 }
 .input_from_city{
-    width: 150px;
+    width: 80%;
     height: 30px;
     color: #686868;
 
@@ -137,7 +137,7 @@ img{
     margin-top: 10px;
 }
 .input_to_city{
-    width: 150px;
+    width: 80%;
     height: 30px;
     color: #686868;
 
