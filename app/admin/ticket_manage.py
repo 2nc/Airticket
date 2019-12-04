@@ -108,6 +108,45 @@ def manage_order():
 def dispose_order():
     order_id = request.args.get('order_id')
     order_t = db.Table('order')
+    ticket_t = db.Table('ticket')
+    #Get order then get plane_id
+    response=order_t.get_item(
+        Key={
+            'order_id': order_id
+        }
+    )
+    order=response['Item']
+    ticket_type=order['ticket_type']
+    plane_id=order['plane_id']
+    #Get ticket by plane_id and get the seat num
+    response=ticket_t.scan(
+        FilterExpression=Attr('name').eq(plane_id)
+    )
+    ticket = response['Items'][0]
+    if ticket_type == 'First-class':
+        num=ticket['first_class_num']
+        classnum='first_class_num'
+    elif ticket_type == 'Business':
+        num=ticket['second_class_num']
+        classnum = 'second_class_num'
+    else:
+        num=ticket['third_class_num']
+        classnum = 'third_class_num'
+
+    # update avaiable space plus 1
+    ticket_t.update_item(
+        Key={
+            'name': plane_id,
+        },
+        UpdateExpression='SET #classnum = :val1',
+        ExpressionAttributeNames={
+            '#classnum': classnum
+        },
+        ExpressionAttributeValues={
+            ':val1': num + 1
+        }
+    )
+    #delete order
     order_t.delete_item(
         Key={
             'order_id': order_id

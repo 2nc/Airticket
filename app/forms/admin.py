@@ -1,7 +1,6 @@
 from wtforms import StringField, PasswordField, Form, SelectField, SubmitField, RadioField, DateField, DateTimeField, \
     HiddenField, IntegerField
 from wtforms.validators import Length, Email, ValidationError, EqualTo, Required,DataRequired
-
 import boto3
 
 db = boto3.resource('dynamodb')
@@ -18,16 +17,16 @@ class AddTicketForm(Form):
 
     id = HiddenField('id')
     submit = SubmitField('Submit')
-    name = StringField('Airline', validators=[Length(2, 10,'Length should between 2-10')])
+    name = StringField('Airline', validators=[Length(2, 10)])
     company_name = SelectField(label="Airline Company", validators=[DataRequired("Please choose")])
 
     depart_city = SelectField("From:", choices=cities, validators=[DataRequired(), Length(2, 10,'Length should between 2-10')])
     arrive_city = SelectField("To:", choices=cities, validators=[DataRequired(), Length(2, 10,'Length should between 2-10')])
 
-    depart_date = DateField(label='Departure Date', format='%m/%d/%Y', validators=DataRequired())
-    depart_time = StringField('Departire Time', validators=DataRequired())
-    arrive_date = DateField(label='Arrival Date', format='%m/%d/%Y', validators=DataRequired())
-    arrive_time = StringField('Arrival Time', validators=DataRequired())
+    depart_date = DateField(label='Departure Date', format='%m/%d/%Y', validators=[DataRequired()])
+    depart_time = StringField('Departire Time', validators=[DataRequired()])
+    arrive_date = DateField(label='Arrival Date', format='%m/%d/%Y', validators=[DataRequired()])
+    arrive_time = StringField('Arrival Time', validators=[DataRequired()])
 
     first_class_price = IntegerField('First Class Price')
     second_class_price = IntegerField('Business Class Price')
@@ -51,8 +50,8 @@ class AddTicketForm(Form):
 class AddAdminForm(Form):
     nickname = StringField('Add New Admin', validators=[DataRequired(), Length(2, 10,'length should between 2-10')])
     password = PasswordField('Password', validators=[DataRequired(),
-                                                     EqualTo('repeat_password'), Length(6, 20),'length should between 6-20'])
-    repeat_password = PasswordField('Confirm Password', validators=[DataRequired(), Length(6, 20,'length should between 6-20')])
+                                                     EqualTo('repeat_password'), Length(6, 20)])
+    repeat_password = PasswordField('Confirm Password', validators=[DataRequired(), Length(6, 20)])
 
 
 class AddCompanyForm(Form):

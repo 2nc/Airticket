@@ -25,7 +25,7 @@ def search():
                             Attr('depart_date').eq(str(form.depart_date.data))
         )
         tickets = response['Items']
-        tickets = SearchTicket(tickets).tickets  # 列表包含着字典
+        tickets = SearchTicket(tickets).tickets
         return render_template('web/SearchResults.html', tickets=tickets, form=form)
 
     form.single_double.default = 'Round-trip'
@@ -33,18 +33,15 @@ def search():
     return render_template('web/SearchResults.html', form=form, tickets=[])
 
 
-@web.route('/order/<plain_id>')
+@web.route('/order/<plane_id>')
 @login_required
-def order(plain_id):
-    """
-    :param plain_id: 代表航班名称,name，需要前端返回。
-    :return:
-    """
+def order(plane_id):
+
     order_id = 'P' + datetime.now().strftime('%Y%m%d%H%M%S')
     form = OrderForm(request.form)
     ticket_t = db.Table('ticket')
     response = ticket_t.scan(
-        FilterExpression=Attr('name').eq(plain_id)
+        FilterExpression=Attr('name').eq(plane_id)
     )
     ticket = response['Items'][0]
 
@@ -52,6 +49,8 @@ def order(plain_id):
     form.route.default = ticket['depart_city'] + '-' + ticket['arrive_city']
     form.depart_time.default = ticket['depart_date'] + '-' + ticket['depart_time']
     form.process()
+
+    session['plane_id']=plane_id
     return render_template('web/OrderInfo.html', form=form)
 
 
@@ -59,6 +58,26 @@ def order(plain_id):
 @login_required
 def save_order():
     form = OrderForm(request.form)
+    #Get space avaiable
+    ticket_t = db.Table('ticket')
+    response = ticket_t.scan(
+        FilterExpression=Attr('name').eq(session['plane_id'])
+    )
+    ticket = response['Items'][0]
+    ticket_type_order=form.ticket_type.data
+    if ticket_type_order == 'First-class':
+        num=ticket['first_class_num']
+        classnum='first_class_num'
+    elif ticket_type_order == 'Business':
+        num=ticket['second_class_num']
+        classnum = 'second_class_num'
+    else:
+        num=ticket['third_class_num']
+        classnum = 'third_class_num'
+    session['no_ticket']=""
+    if num == 0:
+        session['no_ticket'] = "There are no tickets for the class you choose, please change another class"
+        return redirect(url_for('web.order', plane_id=session['plane_id']))
     if request.method == 'POST':  # and form.validate():
         order_t = db.Table('order')
         order_t.put_item(
@@ -71,7 +90,21 @@ def save_order():
                 'ticket_type': form.ticket_type.data,
                 'order_status': 'Completed',
                 'email': form.email.data,
-                'id_card': form.id_card.data
+                'id_card': form.id_card.data,
+                'plane_id': session['plane_id']
+            }
+        )
+        #update avaiable space
+        ticket_t.update_item(
+            Key={
+                'name': session['plane_id'],
+            },
+            UpdateExpression='SET #classnum = :val1',
+            ExpressionAttributeNames={
+                '#classnum': classnum
+            },
+            ExpressionAttributeValues={
+                ':val1': num-1
             }
         )
         return redirect(url_for('web.my_order'))

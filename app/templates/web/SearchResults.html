@@ -75,7 +75,7 @@
                         <td>Information</td>
                         <td>Time</td>
                         <td>Airport</td>
-                        <td>Price</td>
+                        <td>Price/Space</td>
                         <td>From/To</td>
                         <td>Reserve</td>
                     </tr>
@@ -84,9 +84,16 @@
                         <td>{{ item.name }}</td>
                         <td>{{ item.depart_date_time }}/{{ item.arrive_date_time }}</td>
                         <td>{{ item.depart_airport }}/{{ item.arrive_airport }}</td>
-                        <td>{{ item.third_class_pric }}/{{ item.second_class_pric }}/{{ item.first_class_pric }}</td>
+
+                        <td>
+                            <ul>
+                                <li>{{ item.third_class_pric }}/{{item.third_class_num}}</li>
+                                <li>{{ item.second_class_pric }}/{{item.second_class_num}}</li>
+                                <li>{{ item.first_class_pric }}/{{item.first_class_num}}</li>
+                            </ul>
+                        </td>
                         <td>{{ item.depart_city }}/{{ item.arrive_city }}</td>
-                        <td><input type="submit" value="Book" onclick="javascrtpt:window.location.href='{{ url_for('web.order',plain_id=item.name) }}'"><td>
+                        <td><input type="submit" value="Book" onclick="javascrtpt:window.location.href='{{ url_for('web.order',plane_id=item.name) }}'"><td>
                     </tr>
                     {% endfor %}
 

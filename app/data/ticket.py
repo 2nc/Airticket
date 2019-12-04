@@ -22,4 +22,7 @@ class SearchTicket():
 
             temp_ticket['depart_city'] = ticket['depart_city']
             temp_ticket['arrive_city'] = ticket['arrive_city']
+            temp_ticket['first_class_num'] = str(ticket['first_class_num']) + 'tickets'
+            temp_ticket['second_class_num'] = str(ticket['second_class_num']) + 'tickets'
+            temp_ticket['third_class_num'] = str(ticket['third_class_num']) + 'tickets'
             self.tickets.append(temp_ticket)

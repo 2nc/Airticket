@@ -40,7 +40,7 @@ def add_admin():
     admin_t = db.Table('admin')
     response = admin_t.scan()
     admins = response['Items']
-    if request.method == 'POST' and form.validate():
+    if request.method == 'POST': #and form.validate():
         admin_t.put_item(
             Item={
                 'nickname': form.nickname.data,

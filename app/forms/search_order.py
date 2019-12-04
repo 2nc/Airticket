@@ -1,12 +1,10 @@
 
 from datetime import datetime
 from wtforms import StringField, PasswordField, Form, SelectField, RadioField, DateField
-from wtforms.validators import Length,DataRequired
-#from .base import DataRequired
+from wtforms.validators import Length, DataRequired
 
 
 class SearchForm(Form):
-    # 查询机票表单
     cities = [('Toronto', 'Toronto'), ('Montreal', 'Montreal'), ('Vancouver', 'Vancouver'), ('Edmonton', 'Edmonton'),
               ('Regina', 'Regina'), ('Halifax', 'Halifax'), ('Fredericton', 'Fredericton'), ('Regina', 'Regina')]
     single_double = RadioField('Trip Type', choices=[('One-way', 'One-way'), ('Round-trip', 'Round-trip')])
@@ -17,7 +15,6 @@ class SearchForm(Form):
 
 
 class OrderForm(Form):
-    # 预订机票表单
     order_id = StringField('Order ID', validators=[DataRequired()])
     route = StringField('Route', validators=[DataRequired()])
     depart_time = StringField('Departure Time', validators=[DataRequired()])
