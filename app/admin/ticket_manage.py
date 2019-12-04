@@ -1,6 +1,5 @@
 from flask import render_template, request, redirect, url_for, flash
 
-from app.data.admin import CompanyInfo
 from app.data.order import ManageOrder
 from app.forms.admin import AddCompanyForm, AddTicketForm
 from app.config import db
@@ -9,18 +8,13 @@ from datetime import datetime
 from boto3.dynamodb.conditions import Key, Attr
 
 
-@admin.route('/admin/test')
-def test():
-    return 'test'
-
-
 @admin.route('/admin/company', methods=['GET', 'POST'])
 def company():
     form = AddCompanyForm(request.form)
     company_t = db.Table('company')
     response = company_t.scan()
     companys = response['Items']
-    if request.method == 'POST':  # and form.validate():
+    if request.method == 'POST':
         company_t.put_item(
             Item={
                 'company_name': form.company_name.data,
@@ -30,7 +24,6 @@ def company():
         )
         return redirect(url_for('admin.company'))
     return render_template('admin/CompanyManage.html', form=form, companys=companys)
-
 
 
 @admin.route('/admin/company/<company_name>', methods=['GET', 'POST'])
@@ -58,7 +51,6 @@ def change_company(company_name):
     return redirect(url_for('admin.company'))
 
 
-
 @admin.route('/admin/ticket', methods=['GET', 'POST'])
 def add_ticket():
     form = AddTicketForm(request.form)
@@ -67,7 +59,6 @@ def add_ticket():
         ticket = {
             'name': form.name.data,
             'create_time': int(datetime.now().timestamp()),
-            # 'single_double': form.single_double.data,
             'company_name': form.company_name.data,
             'depart_city': form.depart_city.data,
             'arrive_city': form.arrive_city.data,
@@ -94,7 +85,7 @@ def add_ticket():
 @admin.route('/admin/order/manage', methods=['GET', 'POST'])
 def manage_order():
     order_id = request.args.get('order_id')
-    if request.method == 'POST':  # and form.validate():
+    if request.method == 'POST':
         order_t = db.Table('order')
         response = order_t.update_item(
             Key={

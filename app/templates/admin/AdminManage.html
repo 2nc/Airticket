@@ -74,12 +74,19 @@
             {% endfor %}
         </table>
     </div>
+
+
     <div class="admin_add_update">
         <h5 style="text-align: left; color:#cd0a0a" >Add New Administrator</h5>
         <form action="{{ url_for('admin.add_admin') }}" method="post">
-            <table style="margin: 10px;width: 40%">
+            <table style="margin: 10px;width: 80%">
                 <tr>
                     <td>{{ form.nickname.label }}</td>  <td>{{ form.nickname }}</td>
+                    <td>
+                        {% if form.nickname.errors %}
+                        <ul>{% for error in form.nickname.errors %}<li style="color:red">{{ error }}</li>{% endfor %}</ul>
+                        {% endif %}
+                    </td>
                 </tr>
                 <tr>
                     <td>{{ form.password.label }}</td>  <td>{{ form.password }}</td>

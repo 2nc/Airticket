@@ -1,8 +1,8 @@
 
 from datetime import datetime
 from wtforms import StringField, PasswordField, Form, SelectField, RadioField, DateField
-from wtforms.validators import Length
-from .base import DataRequired
+from wtforms.validators import Length,DataRequired
+#from .base import DataRequired
 
 
 class SearchForm(Form):

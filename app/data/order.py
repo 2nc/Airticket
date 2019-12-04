@@ -1,8 +1,6 @@
 from datetime import datetime
 
 
-
-
 class MyOrder():
     def __init__(self, raw_order):
         self.order = []
@@ -36,9 +34,7 @@ class ManageOrder():
             temp_order['route'] = order['route']
             temp_order['depart_time'] = order['depart_time']
             temp_order['status'] = order['order_status']
-            temp_order['uname']=order['uname']
+            temp_order['uname'] = order['uname']
             temp_order['email'] = order['email']
             temp_order['id_card'] = order['id_card']
-            # temp_order['user_name'] = order.user_of_order[0].nickname
-
             self.order.append(temp_order)

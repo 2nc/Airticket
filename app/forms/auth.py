@@ -1,7 +1,6 @@
 
 from wtforms import StringField, PasswordField, Form
-from wtforms.validators import Length, Email, ValidationError, EqualTo
-from .base import DataRequired
+from wtforms.validators import Length,ValidationError, EqualTo,DataRequired
 
 
 class LoginForm(Form):
