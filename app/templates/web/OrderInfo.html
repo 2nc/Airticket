@@ -52,6 +52,11 @@
                 <form action="{{ url_for('web.save_order') }}" method="post" style="color: #E5E5E5">
                      <table style="margin: auto">
                          <tr style="height: 30px">
+                             {%if 'no_ticket' in session:%}
+                             <p style="color: red">{{session['no_ticket']}}</p>
+                             {%endif%}
+                         </tr>
+                         <tr style="height: 30px">
                              <td style="color: #212121">{{ form.order_id.label }}</td>
                              <td>{{ form.order_id }}</td>
                          </tr>

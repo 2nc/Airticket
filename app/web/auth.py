@@ -149,8 +149,7 @@ def login():
             login_user(user, remember=True)
             session['usernickname'] = userc
             next = request.args.get('next')
-            print(next)
-            if not next:  # or not next.startwith('/'):
+            if not next:
                 next = url_for('web.personal_info')
             return redirect(next)
         else:
