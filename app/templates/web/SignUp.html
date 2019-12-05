@@ -42,6 +42,9 @@
     <div class="title">
         <h1 style="color:#363636;font-size: 2.1em">Register</h1>
     </div>
+    {% for msg in get_flashed_messages()  %}
+        <p style="color: #cd0a0a; text-align: center">{{ msg }}</p>
+    {% endfor %}
     <div class="signup_form">
         <form action="{{ url_for('web.register') }}" method="post" style="text-align: center">
             <table style="margin: auto;width: 30%">

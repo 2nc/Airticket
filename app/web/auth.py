@@ -26,7 +26,18 @@ def get_user(uid):
 def register():
     form = RegisterForm(request.form)
     if request.method == 'POST':
+        #judge if there are duplicate user
         user_t = db.Table('user')
+        response = user_t.get_item(
+            Key={
+                'nickname': form.nickname.data
+            }
+        )
+        order = response['Item']
+        if len(order):
+            flash('This username has been registered, try another one')
+            return render_template('web/SignUp.html', form=form)
+
         user_t.put_item(
             Item={
                 'nickname': form.nickname.data,
