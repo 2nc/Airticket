@@ -27,7 +27,6 @@
             <div class="admin_manage_content">
                 <ul class="admin_manage_list">
                     <a class="admin_manage_item" href="{{ url_for('admin.add_admin') }}"><span>Add New Administrator</span></a>
-                    <a class="admin_manage_item" href="{{ url_for('admin.admin_manage') }}"><span>Administrator Management</span></a>
                 </ul>
             </div>
         </div>
@@ -37,8 +36,8 @@
             </div>
             <div class="business_menu">
                 <ul class="business_menu_list">
-                    <a class="business_menu_item" href="{{ url_for('admin.add_ticket') }}"><span>Add New Airline</span></a>
-                    <a class="business_menu_item" href="{{ url_for('admin.company') }}"><span>Company Management</span></a>
+                    <a class="business_menu_item" href="{{ url_for('admin.add_ticket') }}"><span>Add New Flight</span></a>
+                    <a class="business_menu_item" href="{{ url_for('admin.company') }}"><span>Airline Management</span></a>
 {#                    <a class="business_menu_item" href="{{ url_for('admin.test') }}"><span>Ticket Management</span></a>#}
 {#                    <a class="business_menu_item" href="{{ url_for('admin.test') }}"><span>Flight Information</span></a>#}
                     <a class="business_menu_item" href="{{ url_for('admin.manage_order') }}"><span>Order Management</span></a>
@@ -62,7 +61,6 @@
                 <td> Passenger Email </td>
                 <td> Passenger ID </td>
                 <td> Status </td>
-                <td> Confirm </td>
                 <td> Delete </td>
             </tr>
             {% for item in orders %}
@@ -75,15 +73,9 @@
                 <td>{{ item.email }}</td>
                 <td>{{ item.id_card }}</td>
                 <td>{{ item.status }}</td>
-                <td><form action="{{ url_for('admin.manage_order',order_id = item.order_id) }}" method="post">
-                <input type="submit" value="confirm">
-                </form></td>
                 <td><form action="{{ url_for('admin.dispose_order',order_id = item.order_id) }}" method="post">
                 <input type="submit" value="delete">
                 </form></td>
-
-{#                <td><a method="post" href="{{ url_for('admin.manage_order',order_id = item.order_id) }}"><span>Confirm</span></a></td>#}
-{#                <td><a method="delete" href="{{ url_for('admin.manage_order',order_id=item.order_id) }}"><span>Delete</span></a></td>#}
                 </tr>
             {% endfor %}
 

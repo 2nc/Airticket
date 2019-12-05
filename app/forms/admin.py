@@ -13,12 +13,13 @@ class AdminLoginForm(Form):
 
 class AddTicketForm(Form):
     cities = [('Toronto', 'Toronto'), ('Montreal', 'Montreal'), ('Vancouver', 'Vancouver'), ('Edmonton', 'Edmonton'),
-              ('Regina', 'Regina'), ('Halifax', 'Halifax'), ('Fredericton', 'Fredericton'), ('Regina', 'Regina')]
+              ('Regina', 'Regina'), ('Halifax', 'Halifax'), ('Fredericton', 'Fredericton')]
 
     id = HiddenField('id')
     submit = SubmitField('Submit')
-    name = StringField('Airline', validators=[DataRequired()])
-    company_name = SelectField(label="Airline Company", validators=[DataRequired("Please choose")])
+
+    name = StringField('IATA', validators=[DataRequired()])
+    company_name = SelectField(label="Callsign", validators=[DataRequired("Please choose")])
 
     depart_city = SelectField("From:", choices=cities, validators=[DataRequired()])
     arrive_city = SelectField("To:", choices=cities, validators=[DataRequired()])
@@ -48,15 +49,16 @@ class AddTicketForm(Form):
 
 
 class AddAdminForm(Form):
-    nickname = StringField('Add New Admin', validators=[DataRequired()])
+    nickname = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
 
 
+
 class AddCompanyForm(Form):
-    En_name = StringField('Company Abbreviation', validators=[DataRequired()])
-    company_name = StringField('Company Name', validators=[DataRequired()])
+    En_name = StringField('IATA', validators=[DataRequired()])
+    company_name = StringField('Callsign', validators=[DataRequired()])
 
 
 class ChangeCompanyForm(Form):
-    En_name = StringField('Company Abbreviation', validators=[DataRequired()])
-    company_name = StringField('Company Abbreviation', validators=[DataRequired()])
+    En_name = StringField('IATA', validators=[DataRequired()])
+    company_name = StringField('Callsign', validators=[DataRequired()])
