@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{url_for('static', filename='admin_style.css')}}">
-    <title>Add New Airline</title>
+    <title>Add New Flight</title>
 </head>
 <body>
 <div class="head">
@@ -27,7 +27,6 @@
             <div class="admin_manage_content">
                 <ul class="admin_manage_list">
                     <a class="admin_manage_item" href="{{ url_for('admin.add_admin') }}"><span>Add New Administrator</span></a>
-                    <a class="admin_manage_item" href="{{ url_for('admin.admin_manage') }}"><span>Administrator Management</span></a>
                 </ul>
             </div>
         </div>
@@ -37,8 +36,8 @@
             </div>
             <div class="business_menu">
                 <ul class="business_menu_list">
-                    <a class="business_menu_item" href="{{ url_for('admin.add_ticket') }}"><span>Add New Airline</span></a>
-                    <a class="business_menu_item" href="{{ url_for('admin.company') }}"><span>Company Management</span></a>
+                    <a class="business_menu_item" href="{{ url_for('admin.add_ticket') }}"><span>Add New Flight</span></a>
+                    <a class="business_menu_item" href="{{ url_for('admin.company') }}"><span>Airline Management</span></a>
 {#                    <a class="business_menu_item" href="{{ url_for('admin.test') }}"><span>Ticket Management</span></a>#}
 {#                    <a class="business_menu_item" href="{{ url_for('admin.test') }}"><span>Flight Information</span></a>#}
                     <a class="business_menu_item" href="{{ url_for('admin.manage_order') }}"><span>Order Management</span></a>
@@ -49,7 +48,7 @@
 </div>
 <div class="right">
     <div class="right_title">
-{#        <h3>Add New Airline</h3>#}
+{#        <h3>Add New Flight</h3>#}
     </div>
     <div class="changeform">
         <form action="{{ url_for('admin.add_ticket') }}" method="post" style="width: 80%">

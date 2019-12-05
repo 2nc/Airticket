@@ -27,7 +27,6 @@
             <div class="admin_manage_content">
                 <ul class="admin_manage_list">
                     <a class="admin_manage_item" href="{{ url_for('admin.add_admin') }}"><span>Add New Administrator</span></a>
-                    <a class="admin_manage_item" href="{{ url_for('admin.admin_manage') }}"><span>Administrator Management</span></a>
                 </ul>
             </div>
         </div>
@@ -37,8 +36,8 @@
             </div>
             <div class="business_menu">
                 <ul class="business_menu_list">
-                    <a class="business_menu_item" href="{{ url_for('admin.add_ticket') }}"><span>Add New Airline</span></a>
-                    <a class="business_menu_item" href="{{ url_for('admin.company') }}"><span>Company Management</span></a>
+                    <a class="business_menu_item" href="{{ url_for('admin.add_ticket') }}"><span>Add New Flight</span></a>
+                    <a class="business_menu_item" href="{{ url_for('admin.company') }}"><span>Airline Management</span></a>
 {#                    <a class="business_menu_item" href="{{ url_for('admin.test') }}"><span>Ticket Management</span></a>#}
 {#                    <a class="business_menu_item" href="{{ url_for('admin.test') }}"><span>Flight Information</span></a>#}
                     <a class="business_menu_item" href="{{ url_for('admin.manage_order') }}"><span>Order Management</span></a>
@@ -51,8 +50,8 @@
     <div class="company_manage">
         <table style="margin: 20px;width: 60%">
             <tr>
-                <td>Company Abbreviation</td>
-                <td>Company Name</td>
+                <td>IATA</td>
+                <td>Callsign</td>
                 <td>Delete</td>
 {#                <td>Edit</td>#}
             </tr>

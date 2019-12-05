@@ -13,12 +13,12 @@ class AdminLoginForm(Form):
 
 class AddTicketForm(Form):
     cities = [('Toronto', 'Toronto'), ('Montreal', 'Montreal'), ('Vancouver', 'Vancouver'), ('Edmonton', 'Edmonton'),
-              ('Regina', 'Regina'), ('Halifax', 'Halifax'), ('Fredericton', 'Fredericton'), ('Regina', 'Regina')]
+              ('Regina', 'Regina'), ('Halifax', 'Halifax'), ('Fredericton', 'Fredericton')]
 
     id = HiddenField('id')
     submit = SubmitField('Submit')
-    name = StringField('Airline', validators=[Length(2, 10)])
-    company_name = SelectField(label="Airline Company", validators=[DataRequired("Please choose")])
+    name = StringField('IATA', validators=[Length(2, 10)])
+    company_name = SelectField(label="Callsign", validators=[DataRequired("Please choose")])
 
     depart_city = SelectField("From:", choices=cities, validators=[DataRequired(), Length(2, 10,'Length should between 2-10')])
     arrive_city = SelectField("To:", choices=cities, validators=[DataRequired(), Length(2, 10,'Length should between 2-10')])
@@ -48,17 +48,17 @@ class AddTicketForm(Form):
 
 
 class AddAdminForm(Form):
-    nickname = StringField('Add New Admin', validators=[DataRequired(), Length(2, 10,'length should between 2-10')])
+    nickname = StringField('Username', validators=[DataRequired(), Length(2, 10,'length should between 2-10')])
     password = PasswordField('Password', validators=[DataRequired(),
                                                      EqualTo('repeat_password'), Length(6, 20)])
     repeat_password = PasswordField('Confirm Password', validators=[DataRequired(), Length(6, 20)])
 
 
 class AddCompanyForm(Form):
-    En_name = StringField('Company Abbreviation', validators=[DataRequired()])
-    company_name = StringField('Company Name', validators=[DataRequired(), Length(2, 20,'length should between 2-20')])
+    En_name = StringField('IATA', validators=[DataRequired()])
+    company_name = StringField('Callsign', validators=[DataRequired(), Length(2, 20,'length should between 2-20')])
 
 
 class ChangeCompanyForm(Form):
-    En_name = StringField('Company Abbreviation')
-    company_name = StringField('Company Abbreviation', validators=[DataRequired()])
+    En_name = StringField('IATA')
+    company_name = StringField('Callsign', validators=[DataRequired()])
