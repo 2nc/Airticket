@@ -1,7 +1,6 @@
 
 from flask import render_template, request, url_for
 
-from app.data.ticket import SearchTicket
 from app.forms.search_order import SearchForm
 from . import web
 
@@ -19,5 +18,5 @@ from flask import send_from_directory
 @web.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(web.root_path, 'static'),
-                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon') #sign for ico file
 

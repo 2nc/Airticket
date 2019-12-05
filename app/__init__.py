@@ -1,4 +1,4 @@
-from flask import Flask, url_for
+from flask import Flask, url_for, session
 from flask_login import LoginManager
 from flask_s3 import FlaskS3
 import flask_s3
@@ -42,6 +42,7 @@ def create_app():
                 'create_time': int(datetime.now().timestamp())
             }
         )
+
     return app
 
 

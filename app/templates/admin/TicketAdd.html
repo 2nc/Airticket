@@ -53,6 +53,9 @@
     </div>
     <div class="changeform">
         <form action="{{ url_for('admin.add_ticket') }}" method="post" style="width: 80%">
+            {% for msg in get_flashed_messages()  %}
+                <p style="color: #cd0a0a; text-align: center">{{ msg }}</p>
+            {% endfor %}
             <table style="margin: 10px;width: 70%">
                 <tr style="height: 30px">
                     <td>{{ form.name.label }}</td>

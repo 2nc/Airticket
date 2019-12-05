@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, flash,session
 
 from app.data.order import ManageOrder
 from app.forms.admin import AddCompanyForm, AddTicketForm
@@ -10,6 +10,10 @@ from boto3.dynamodb.conditions import Key, Attr
 
 @admin.route('/admin/company', methods=['GET', 'POST'])
 def company():
+    if 'auth' not in session:
+        return redirect(url_for('admin.login'))
+    if not session['auth']:
+        return redirect(url_for('admin.login'))
     form = AddCompanyForm(request.form)
     company_t = db.Table('company')
     response = company_t.scan()
@@ -28,6 +32,10 @@ def company():
 
 @admin.route('/admin/company/<company_name>', methods=['GET', 'POST'])
 def change_company(company_name):
+    if 'auth' not in session:
+        return redirect(url_for('admin.login'))
+    if not session['auth']:
+        return redirect(url_for('admin.login'))
     # form = AddCompanyForm(request.form)
     company_t = db.Table('company')
     response = company_t.scan(
@@ -51,8 +59,13 @@ def change_company(company_name):
     return redirect(url_for('admin.company'))
 
 
+
 @admin.route('/admin/ticket', methods=['GET', 'POST'])
 def add_ticket():
+    if 'auth' not in session:
+        return redirect(url_for('admin.login'))
+    if not session['auth']:
+        return redirect(url_for('admin.login'))
     form = AddTicketForm(request.form)
     if request.method == 'POST':  # and form.validate():
         ticket_t = db.Table('ticket')
@@ -78,12 +91,17 @@ def add_ticket():
         ticket_t.put_item(
             Item=ticket
         )
+        flash('Create ticket success!')
         return redirect(url_for('admin.add_ticket'))
     return render_template('admin/TicketAdd.html', form=form)
 
 
 @admin.route('/admin/order/manage', methods=['GET', 'POST'])
 def manage_order():
+    if 'auth' not in session:
+        return redirect(url_for('admin.login'))
+    if not session['auth']:
+        return redirect(url_for('admin.login'))
     order_id = request.args.get('order_id')
     if request.method == 'POST':
         order_t = db.Table('order')
@@ -106,6 +124,10 @@ def manage_order():
 
 @admin.route('/admin/order/dispose_order', methods=['POST'])
 def dispose_order():
+    if 'auth' not in session:
+        return redirect(url_for('admin.login'))
+    if not session['auth']:
+        return redirect(url_for('admin.login'))
     order_id = request.args.get('order_id')
     order_t = db.Table('order')
     ticket_t = db.Table('ticket')

@@ -22,8 +22,12 @@
 				</ul>
 				<div class="clearfix"> </div>
                 <div class="signinform">
+                    {% for msg in get_flashed_messages()  %}
+                        <p style="color: #cd0a0a; text-align: center">{{ msg }}</p>
+                    {% endfor %}
                     <form class="adminsign" action="{{ url_for('admin.login') }}" method="post">
                         <table style="margin: 0 auto;width: auto;height: auto">
+
                             <tr style="height: 50px;width: 100px">
                                 <td style="height: 50px">{{ form.nickname.label }}</td> <td>{{ form.nickname }}</td>
                             </tr>

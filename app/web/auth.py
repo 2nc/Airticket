@@ -11,28 +11,21 @@ from app import login_manager
 import boto3
 from botocore.exceptions import ClientError
 
+
 class User(UserMixin):
-    def is_authenticated(self):
-        return True
+    def __init__(self, id):
+        self.id = id
 
-    def is_actice(self):
-        return True
-
-    def is_anonymous(self):
-        return False
-
-    def get_id(self):
-        return "1"
 
 @login_manager.user_loader
 def get_user(uid):
-    user=User()
-    return user
+    return User(uid)
+
 
 @web.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm(request.form)
-    if request.method == 'POST':  # and form.validate():
+    if request.method == 'POST':
         user_t = db.Table('user')
         user_t.put_item(
             Item={
@@ -116,7 +109,7 @@ def register():
                 Source=SENDER,
                 # If you are not using a configuration set, comment or delete the
                 # following line
-              #  ConfigurationSetName=CONFIGURATION_SET,
+                #  ConfigurationSetName=CONFIGURATION_SET,
             )
         # Display an error if something goes wrong.
         except ClientError as e:
@@ -132,26 +125,29 @@ def register():
 @web.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm(request.form)
-    if request.method == 'POST' and form.validate():
+    if request.method == 'POST':  # and form.validate():
         user_t = db.Table('user')
         response = user_t.scan(
             FilterExpression=Attr('nickname').eq(form.nickname.data)
         )
-        userc = response['Items'][0]['nickname']
-        pw = response['Items'][0]['password']
-        if userc and check_password_hash(pw,form.password.data):
-            from flask import session
-            from datetime import timedelta
+        if len(response['Items']) != 0:
+            userc = response['Items'][0]['nickname']
+            pw = response['Items'][0]['password']
+            if userc and check_password_hash(pw, form.password.data):
+                from flask import session
+                from datetime import timedelta
 
-            session.permanent = True
-            app.permanent_session_lifetime = timedelta(minutes=30)
-            user=User()
-            login_user(user, remember=True)
-            session['usernickname'] = userc
-            next = request.args.get('next')
-            if not next:
-                next = url_for('web.personal_info')
-            return redirect(next)
+                session.permanent = True
+                app.permanent_session_lifetime = timedelta(minutes=30)
+                user = User(datetime.now())
+                login_user(user, remember=True)
+                session['usernickname'] = userc
+                next = request.args.get('next')
+                if not next:
+                    next = url_for('web.personal_info')
+                return redirect(next)
+            else:
+                flash('Account does not exist or wrong password')
         else:
             flash('Account does not exist or wrong password')
     return render_template('web/VIPSignIn.html', form=form)
@@ -161,7 +157,7 @@ def login():
 @login_required
 def personal_info():
     form = ChangeInfoForm(request.form)
-    if request.method == 'POST' and form.validate():
+    if request.method == 'POST': #and form.validate():
         user_t = db.Table('user')
         user_t.update_item(
             Key={
@@ -175,12 +171,13 @@ def personal_info():
                 ':val4': generate_password_hash(form.password.data)
             }
         )
+        flash('Change user information success')
         return redirect(url_for('web.personal_info'))
     user_t = db.Table('user')
     response = user_t.scan(
         FilterExpression=Attr('nickname').eq(session['usernickname'])
     )
-    user=response['Items'][0]
+    user = response['Items'][0]
     form.nickname.default = user['nickname']
     form.password.default = user['password']
     form.name.default = user['tname']
@@ -189,46 +186,9 @@ def personal_info():
     form.process()
     return render_template('web/VIPInfo.html', form=form)
 
-
-@web.route('/changeInfo', methods=['GET', 'POST'])
-@login_required
-def change_info():
-    form = ChangeInfoForm(request.form)
-    if request.method == 'POST' and form.validate():
-        user_t = db.Table('user')
-        user_t.update_item(
-            Key={
-                'nickname': form.nickname.data,
-            },
-            UpdateExpression='SET tname = :val1, email = :val2, id_card = :val3, password = :val4',
-            ExpressionAttributeValues={
-                ':val1': form.name.data,
-                ':val2': form.email.data,
-                ':val3': form.id_card.data,
-                ':val4': generate_password_hash(form.password.data)
-            }
-        )
-        return '用户信息更改成功'
-    return redirect(url_for('web.personal_info'))
-
-
-@web.route('/reset/password', methods=['GET', 'POST'])
-def forget_password_request():
-    pass
-
-
-@web.route('/reset/password/<token>', methods=['GET', 'POST'])
-def forget_password(token):
-    pass
-
-
-@web.route('/change/password', methods=['GET', 'POST'])
-def change_password():
-    pass
-
-
 @web.route('/logout')
 @login_required
 def logout():
+    session['auth']=0
     logout_user()
     return redirect(url_for('web.index'))

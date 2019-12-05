@@ -10,19 +10,19 @@ class LoginForm(Form):
 
 
 class RegisterForm(Form):
-    nickname = StringField('Username', validators=[DataRequired(), Length(2, 10)])
+    nickname = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired(),
-                                               EqualTo('repeat_password'), Length(6, 20)])
-    repeat_password = PasswordField('Confirm Password', validators=[DataRequired(), Length(6, 20)])
-    name = StringField('Name', validators=[DataRequired(), Length(1, 10)])
+                                               EqualTo('repeat_password')])
+    repeat_password = PasswordField('Confirm Password', validators=[DataRequired()])
+    name = StringField('Name', validators=[DataRequired()])
     id_card = StringField('ID Number', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired()])
 
 
 
 class ChangeInfoForm(Form):
-    nickname = StringField('Username', validators=[DataRequired(), Length(2, 10)])
-    password = PasswordField('Password', validators=[DataRequired(), Length(6, 20)])
-    name = StringField('Name', validators=[DataRequired(), Length(1, 10)])
+    nickname = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password')
+    name = StringField('Name', validators=[DataRequired()])
     id_card = StringField('ID Number', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired()])
