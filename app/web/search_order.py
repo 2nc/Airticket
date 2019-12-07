@@ -3,7 +3,7 @@ from datetime import datetime
 
 from flask import render_template, request, redirect, url_for, session
 from flask_login import current_user, login_required
-
+import json
 from app.data.order import MyOrder
 from app.data.ticket import SearchTicket
 from app.forms.search_order import SearchForm, OrderForm
@@ -107,6 +107,56 @@ def save_order():
                 ':val1': num-1
             }
         )
+        address = 'http://api.qrserver.com/v1/create-qr-code/?data='+form.order_id.data+'&size=100x100'
+        client = boto3.client('ses', region_name='us-east-1')
+        response = client.update_template(
+            Template={
+                'TemplateName': 'TEMPLATE',
+                'SubjectPart': 'Your Reservation is Confirmed!',
+                'TextPart': 'Dear {{name}},we are pleased to tell you that your reservition is confirmed! This is your certification: {{address}} ',
+                'HtmlPart': """<html>
+                                <p>Dear {{name}},
+                                <br>we are pleased to tell you that flight {{flight}} is confirmed for you!
+                                <br>Details:
+                                <br>Passenger: {{name}}
+                                <br>Route: {{route}}
+                                <br>Departure time: {{depart_time}}
+                                <br>Type: {{type}}
+                                <br>Order Status: Comfirmed
+                                <br>This is your certification: 
+                                <br>{{address}} 
+                                <br>Please download the QR code to check in.
+                                </p>
+                                </body>
+                                </html>
+                                """
+            }
+        )
+        data = {'name':session['usernickname'],
+                'route':form.route.data,
+                'flight':session['plane_id'],
+                'depart_time': form.depart_time.data,
+                'type': form.ticket_type.data,
+                'address':address}
+        data_str = json.JSONEncoder().encode(data)
+        email = client.send_templated_email(
+            Source='nianchong.wu@mail.utoronto.ca',
+            Destination={
+                'ToAddresses': [
+                    form.email.data,
+                ],
+            },
+            Tags=[
+                {
+                    'Name': 'name',
+                    'Value': 'value'
+                },
+            ],
+            Template='TEMPLATE',
+            TemplateData= data_str
+        )
+        print(email)
+
         return redirect(url_for('web.my_order'))
 
 
