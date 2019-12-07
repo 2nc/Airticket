@@ -107,7 +107,7 @@ def save_order():
                 ':val1': num-1
             }
         )
-        address = 'http://api.qrserver.com/v1/create-qr-code/?data='+form.order_id.data+'&size=100x100'
+        address = 'http://api.qrserver.com/v1/create-qr-code/?data='+form.order_id.data+form.id_card.data+'&size=100x100'
         client = boto3.client('ses', region_name='us-east-1')
         response = client.update_template(
             Template={
@@ -123,9 +123,7 @@ def save_order():
                                 <br>Departure time: {{depart_time}}
                                 <br>Type: {{type}}
                                 <br>Order Status: Comfirmed
-                                <br>This is your certification: 
-                                <br>{{address}} 
-                                <br>Please download the QR code to check in.
+                                <br>Click <a href={{address}}>here</a> to download the QR code to check in.
                                 </p>
                                 </body>
                                 </html>
