@@ -33,8 +33,7 @@ def register():
                 'nickname': form.nickname.data
             }
         )
-        order = response['Item']
-        if len(order):
+        if response.__contains__('Item'):
             flash('This username has been registered, try another one')
             return render_template('web/SignUp.html', form=form)
 
