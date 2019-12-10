@@ -46,10 +46,6 @@
     <div class="left">
         <div class="search_form">
             <form action="{{url_for('web.search')}}" method="post">
-                <div class="single_double" style="width: 100%">
-                    <h3>{{ form.single_double.label }}</h3>
-                     {{ form.single_double }}
-                </div>
                 <div class="from" style="width: 100%">
                     <h3>{{ form.depart_city.label}}</h3>
                     {{form.depart_city(class="input_from_city" )}}
