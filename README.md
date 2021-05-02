@@ -306,5 +306,4 @@ None
 ```
 1000000 users:
 ```
-@ Copyright 2019, Nianchong Wu(1005851375) & Jingwen Zhang(1006424040) & Yiyun
-Xu(1005678036). Created using Markdown
+@ Copyright 2019, Nianchong Wu & Jingwen Zhang & Yiyun Xu. Created using Markdown
